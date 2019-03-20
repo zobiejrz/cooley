@@ -93,7 +93,7 @@ class Character:
 	spell_attack_bonus = 0
 	spell_slots = 0
 	spell_slots_used = 0
-	cantrips = [["none", "notes"]]
+	cantrips = []
 	spellbook = [[["name", "note"]]]
 
 	def __init__(self):
@@ -207,18 +207,23 @@ class Character:
 	# def add_spell(self, lvl, name, notes):
 	# 	"""adds spell to spellbook"""
 
-	# def del_cantrip(self, num):
-	# 	"""removes cantrip from cantrips"""
+	def edit_cantrips(self, num, name, notes):
+		"""edits cantrip at index num - 1"""
+		self.cantrips[num - 1] = [name, notes]
 
-	# def add_cantrip(self, name, notes):
-	# 	"""adds cantrip to cantrips"""
-	# 	self.cantrips.append([name,notes])
+	def del_cantrips(self, num):
+		"""removes cantrip at index num - 1"""
+		del self.cantrips[num - 1]
 
-	# def disp_cantrips(self):
-	# 	"""Prints all cantrips"""
+	def add_cantrips(self, name, notes):
+		"""adds cantrip at index num + 1"""
+		self.cantrips.append([name,notes])
 
-	# 	for x in range(0, len(cantrips)):
-	# 		print("{}: {} - {}".format(x, cantrips[x, 0], cantrips[x, 1]))
+	def disp_cantrips(self):
+		"""Prints all cantrips"""
+		clen = len( self.cantrips )
+		for x in range(0, clen):
+			print("{}: {} - {}".format(x + 1, self.cantrips[x][0], self.cantrips[x][1]))
 
 	# def update_variables(self):
 	# 	"""make sure skill atributes are updated with proficiency bonus"""
