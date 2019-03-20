@@ -112,6 +112,11 @@ class Character:
 		for x in range(0, len(self.cla)):
 			print("{}: {}, {}".format(x+1, self.cla[x][0], self.cla[x][1]))
 
+	def disp_class(self):
+		"""Display Classes"""
+		for x in range(0, len(self.cla)):
+			print("{}: {}, {}".format(x+1, self.cla[x][0], self.cla[x][1]))
+
 	def add_class(self, name, level):
 		"""Add a class to cla"""
 		self.cla.append([name, level])
