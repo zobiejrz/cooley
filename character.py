@@ -83,7 +83,7 @@ class Character:
 	eyes = ""
 	character_appearance = ""
 	character_backstory = ""
-	additional_features_traits = ["none"]
+	more_features_traits = ["none"]
 	treasure = ["none"]
 
 	# Page 3
@@ -147,7 +147,7 @@ class Character:
 			print("WARNING: THERE ARE MORE THAN 3 ATTACKS")
 
 		for x in range(0, alen):
-			print("{}: {} / {} / {}".format(x, self.attacks[x][0], self.attacks[x][1], self.attacks[x][2]))
+			print("{}: {} / {} / {}".format(x + 1, self.attacks[x][0], self.attacks[x][1], self.attacks[x][2]))
 
 	def add_attacks(self, name, bonus, damage):
 		"""Adds Attack to attacks"""
@@ -159,8 +159,8 @@ class Character:
 	
 	def del_attacks(self, num):
 		"""Removes attack from attacks at index slot"""
-		del self.attacks[num]
-#
+		del self.attacks[num - 1]
+
 #    def disp_spellbook(self):
 #        """prints spellbook, cantrips, spell_slots (page 3)"""
 #
@@ -185,6 +185,7 @@ class Character:
 
 #    def update_variables(self):
 #        """make sure skill atributes are updated with proficiency bonus"""
+
 	def add_to_xp(self, num):
 		"""Add to current xp number"""
 		self.xp += num
