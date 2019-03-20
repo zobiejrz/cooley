@@ -110,7 +110,7 @@ class Character:
 		print("Armor Class: {}".format(self.armor_class))
 		print("~~CLASSES~~")
 		for x in range(0, len(self.cla)):
-			print("{}: {}, {}".format(x, self.cla[x][0], self.cla[x][1]))
+			print("{}: {}, {}".format(x+1, self.cla[x][0], self.cla[x][1]))
 
 	def add_class(self, name, level):
 		"""Add a class to cla"""
@@ -118,7 +118,7 @@ class Character:
 
 	def del_class(self, num):
 		"""delete a class from cla"""
-		del self.cla[num]
+		del self.cla[num-1]
 
 	def edit_class_lvl(self, num, new_level):
 		"""change level of a class in cla"""
@@ -161,17 +161,17 @@ class Character:
 		"""Removes attack from attacks at index slot"""
 		del self.attacks[num - 1]
 
-#    def disp_spellbook(self):
-#        """prints spellbook, cantrips, spell_slots (page 3)"""
-#
-#    def del_spell(self, num):
-#        """removes spell from spellbook"""
-#
-#    def add_spell(self, lvl, name, notes):
-#        """adds spell to spellbook"""
+	# def disp_spellbook(self):
+	# 	"""prints spellbook, cantrips, spell_slots (page 3)"""
 
-#    def del_cantrip(self, num):
-#        """removes cantrip from cantrips"""
+	# def del_spell(self, num):
+	# 	"""removes spell from spellbook"""
+
+	# def add_spell(self, lvl, name, notes):
+	# 	"""adds spell to spellbook"""
+
+	# def del_cantrip(self, num):
+	# 	"""removes cantrip from cantrips"""
 
 	# def add_cantrip(self, name, notes):
 	# 	"""adds cantrip to cantrips"""
@@ -183,8 +183,8 @@ class Character:
 	# 	for x in range(0, len(cantrips)):
 	# 		print("{}: {} - {}".format(x, cantrips[x, 0], cantrips[x, 1]))
 
-#    def update_variables(self):
-#        """make sure skill atributes are updated with proficiency bonus"""
+	# def update_variables(self):
+	# 	"""make sure skill atributes are updated with proficiency bonus"""
 
 	def add_to_xp(self, num):
 		"""Add to current xp number"""
