@@ -109,13 +109,20 @@ class Character:
 		print("HP: {}(max) + {}(temp)/{}".format(self.current_hp, self.temp_hp, self.max_hp))
 		print("Armor Class: {}".format(self.armor_class))
 		print("~~CLASSES~~")
+		for x in range(0, len(self.cla)):
+			print("{}: {}, {}".format(x, self.cla[x][0], self.cla[x][1]))
 
-
-	def add_class(self):
+	def add_class(self, name, level):
 		"""Add a class to cla"""
+		self.cla.append([name, level])
 
-	def del_class(self):
+	def del_class(self, num):
 		"""delete a class from cla"""
+		del self.cla[num]
+
+	def edit_class_lvl(self, num, new_level):
+		"""change level of a class in cla"""
+		self.cla[num][1] = new_level
 
 	def disp_money(self):
 		"""prints balance"""
