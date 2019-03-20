@@ -99,26 +99,26 @@ class Character:
 	def __init__(self):
 		"""init default variables"""
 
-	def roll(self, num):
+   def roll(self, num):
 		"""picks a number between 1 and num"""
 		print(random.randint(1,num+1))
-
-	def print_basic_stats(self):
-		"""Name, Class, Alignment, Background, XP, Armor Class, HP"""
-		print("{}, {}xp".format(self.name,self.xp))
-		print("HP: {}(max) + {}(temp)/{}".format(self.current_hp, self.temp_hp, self.max_hp))
-		print("Armor Class: {}".format(self.armor_class))
-		print("~~CLASSES~~")
-		print("{} alignment".format(self.align))
-		
-		print("")
-
-	
-	def add_class(self):
-		"""Add a class to cla"""
-	
-	def del_class(self):
-		"""delete a class from cla"""
+#
+#    def print_basic_stats(self):
+#        """Name, Class, Alignment, Background, XP, Armor Class, HP"""
+#        print("{}, {}xp".format(self.name,self.xp))
+#        print("HP: {}(max) + {}(temp)/{}".format(self.current_hp, self.temp_hp, self.max_hp))
+#        print("Armor Class: {}".format(self.armor_class))
+#        print("~~CLASSES~~")
+#        print("{} alignment".format(self.align))
+#
+#        print("")
+#
+#
+#    def add_class(self):
+#        """Add a class to cla"""
+#
+#    def del_class(self):
+#        """delete a class from cla"""
 
 	def disp_money(self):
 		"""prints balance"""
@@ -130,30 +130,43 @@ class Character:
 		
 	def edit_money(self, plat, gold, elec, silv, copp):
 		"""edits balance (handle negatives)"""
+		self.pp += plat
+		self.gp += gold
+		self.ep += elec
+		self.sp += silv
+		self.cp += copp
 
-	def print_attacks(self):
-		"""Prints Attacks"""
-	
-	def edit_attacks(self, slot, name, bonus, damage):
-		"""Edit Attacks"""
+#    def print_attacks(self):
+#        """Prints Attacks"""
+#
+#    def edit_attacks(self, slot, name, bonus, damage):
+#        """Edit Attacks"""
+#
+#    def print_spellbook(self):
+#        """prints spellbook, cantrips, spell_slots (page 3)"""
+#
+#    def del_spell(self, num):
+#        """removes spell from spellbook"""
+#
+#    def add_spell(self, lvl, name, notes):
+#        """adds spell to spellbook"""
 
-	def print_spellbook(self):
-		"""prints spellbook, cantrips, spell_slots (page 3)"""
-
-	def del_spell(self, num):
-		"""removes spell from spellbook"""
-	
-	def add_spell(self, lvl, name, notes):
-		"""adds spell to spellbook"""
-
-	def del_cantrip(self, num):
-		"""removes cantrip from cantrips"""
-	
-	def add_cantrip(self, name, notes):
-		"""adds cantrip to cantrips"""
-
-	def update_variables(self):
-		"""make sure skill atributes are updated with proficiency bonus"""
-	
-	def change_temp_hp(self, num):
-		"""changes temporary hp"""
+#    def del_cantrip(self, num):
+#        """removes cantrip from cantrips"""
+#
+#    def add_cantrip(self, name, notes):
+#        """adds cantrip to cantrips"""
+#        self.cantrips.append([name,notes])
+#
+#    def print_cantrips(self):
+#        """Prints all cantrips"""
+#
+#        for i in len(self.cantrips):
+#            print("{}: {} - {}".format(i, cantrips[i, 0], cantrips[i, 1]))
+#
+#    def update_variables(self):
+#        """make sure skill atributes are updated with proficiency bonus"""
+#
+#    def change_temp_hp(self, num):
+#        """changes temporary hp"""
+#        self.temp_hp = num
