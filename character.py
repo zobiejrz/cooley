@@ -133,18 +133,33 @@ class Character:
 		print("Copper: {}".format(self.cp))
 		
 	def edit_money(self, plat, gold, elec, silv, copp):
-		"""edits balance (handle negatives)"""
+		"""edits balance (handles negatives)"""
 		self.pp += plat
 		self.gp += gold
 		self.ep += elec
 		self.sp += silv
 		self.cp += copp
 
-#    def print_attacks(self):
-#        """Prints Attacks"""
-#
-#    def edit_attacks(self, slot, name, bonus, damage):
-#        """Edit Attacks"""
+	def disp_attacks(self):
+		"""Prints Attacks from attacks"""
+		alen = len(self.attacks)
+		if alen > 3:
+			print("WARNING: THERE ARE MORE THAN 3 ATTACKS")
+
+		for x in range(0, alen):
+			print("{}: {} / {} / {}".format(x, self.attacks[x][0], self.attacks[x][1], self.attacks[x][2]))
+
+	def add_attacks(self, name, bonus, damage):
+		"""Adds Attack to attacks"""
+		self.attacks.append([name, bonus, damage])
+
+	def edit_attacks(self, slot, name, bonus, damage):
+		"""Edit Attacks"""
+		self.attacks[slot] = [name, bonus, damage]
+	
+	def del_attacks(self, num):
+		"""Removes attack from attacks at index slot"""
+		del self.attacks[num]
 #
 #    def disp_spellbook(self):
 #        """prints spellbook, cantrips, spell_slots (page 3)"""
