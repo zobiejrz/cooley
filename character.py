@@ -3,7 +3,7 @@ class Character:
 	"""Stores and edits character data."""
 	# Page 1
 	name = "default"
-	cla = [["default", 0]]
+	cla = []
 	background = ""
 	race = "default"
 	align = "default"
@@ -25,7 +25,7 @@ class Character:
 	death_saves_success = 0
 	death_saves_failure = 0
 
-	attacks = [["none", 0, "D6"], ["none", 0, "D6"], ["none", 0, "D6"]]
+	attacks = []
 
 	proficiency_bonus = 0
 	inspiration = 0
@@ -64,14 +64,14 @@ class Character:
 	survival = 0
 	passive_wisdom = 0
 
-	other_proficiences_languages = ["none"]
+	other_proficiences_languages = []
 	cp = 0
 	sp = 0
 	ep = 0
 	gp = 0
 	pp = 0
-	equipment = [["filler", "notes"]]
-	features_traits = [""]
+	equipment = []
+	features_traits = []
 
 	# Page 2
 	allies_organizations = ["none"]
@@ -101,7 +101,9 @@ class Character:
 
 	def roll(self, num):
 		"""picks a number between 1 and num"""
-		print(random.randint(1,num))
+		a = random.randint(1,num)
+		print(a)
+		return a
 
 	def disp_basic_stats(self):
 		"""Name, Class, Alignment, Background, XP, Armor Class, HP"""
@@ -165,6 +167,36 @@ class Character:
 	def del_attacks(self, num):
 		"""Removes attack from attacks at index slot"""
 		del self.attacks[num - 1]
+	
+	def add_xp(self, num):
+		"""Add to current xp number"""
+		self.xp += num
+	
+	def change_xp(self, num):
+		"""Change xp number"""
+		self.xp = num
+
+	def change_temp_hp(self, num):
+		"""changes temporary hp"""
+		self.temp_hp = num
+	
+	def edit_equipment(self, num, name, notes):
+		"""Edits equipment and index num with name and notes"""
+		self.equipment[num] = [name, notes]
+
+	def disp_equipment(self):
+		"""Displays all items in equipment"""
+		elen = len (self.equipment)
+		for x in range(0, elen):
+			print("{}: {} - {}".format(x + 1, self.equipment[x][0], self.equipment[x][1]))
+
+	def add_equipment(self, name, notes):
+		"""Adds anything to equipment"""
+		self.equipment.append([name, notes])
+
+	def del_equipment(self, num):
+		"""delete from equipment at position num-1"""
+		del self.equipment[num-1]
 
 	# def disp_spellbook(self):
 	# 	"""prints spellbook, cantrips, spell_slots (page 3)"""
@@ -190,15 +222,3 @@ class Character:
 
 	# def update_variables(self):
 	# 	"""make sure skill atributes are updated with proficiency bonus"""
-
-	def add_to_xp(self, num):
-		"""Add to current xp number"""
-		self.xp += num
-	
-	def change_xp(self, num):
-		"""Change xp number"""
-		self.xp = num
-
-	def change_temp_hp(self, num):
-		"""changes temporary hp"""
-		self.temp_hp = num
