@@ -94,7 +94,7 @@ class Character:
 	spell_slots = 0
 	spell_slots_used = 0
 	cantrips = []
-	spellbook = [[["name", "note"]]]
+	spellbook = [[[]]]
 
 	def __init__(self):
 		"""init default variables"""
@@ -198,14 +198,36 @@ class Character:
 		"""delete from equipment at position num-1"""
 		del self.equipment[num-1]
 
-	# def disp_spellbook(self):
-	# 	"""prints spellbook, cantrips, spell_slots (page 3)"""
 
-	# def del_spell(self, num):
-	# 	"""removes spell from spellbook"""
+	def disp_spellbook(self):
+		"""prints spellbook, cantrips, spell_slots (page 3)"""
+		print("Spell Slots: {} / {}".format(self.spell_slots_used, self.spell_slots))
+
+		self.disp_cantrips()
+		self.disp_spell()
+		
+
+	def disp_spell(self):
+		"""prints only spells"""
+		print("~~~ Spells ~~~")
+		slen  = len(self.spellbook)
+		for x in range(0, slen):
+			llen = len(self.spellbook[x])
+			print ("Level {}".format(x + 1))
+			for y in range(0, llen):
+				print("{}: {} - {}".format(y + 1, self.spellbook[x][y][0], self.spellbook[x][y][1]))
+
+	# def del_spell(self, lvl, num):
+	# 	"""removes spell from spellbook at index [lvl][num]"""
+	# 	del self.spellbook[lvl - 1][num - 1]
 
 	# def add_spell(self, lvl, name, notes):
 	# 	"""adds spell to spellbook"""
+	# 	self.spellbook[lvl - 1].append = [name, notes]
+
+	# def edit_spell(self, lvl, num, name, notes):
+	# 	"""Edits spell in at index [lvl][num]"""
+	# 	self.spellbook[lvl - 1][num] = [name, notes]
 
 	def edit_cantrips(self, num, name, notes):
 		"""edits cantrip at index num - 1"""
@@ -222,6 +244,7 @@ class Character:
 	def disp_cantrips(self):
 		"""Prints all cantrips"""
 		clen = len( self.cantrips )
+		print('~~~Cantrips~~~')
 		for x in range(0, clen):
 			print("{}: {} - {}".format(x + 1, self.cantrips[x][0], self.cantrips[x][1]))
 
