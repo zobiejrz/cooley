@@ -1,4 +1,6 @@
 import random
+import pandas
+
 class Character:
 	"""Stores and edits character data."""
 	# Page 1
@@ -44,24 +46,20 @@ class Character:
 	sav_wis = 0
 	sav_char = 0
 
-	acrobatics = 0
-	animal_handle = 0
-	arcana = 0
-	athletics = 0
-	deception = 0
-	history = 0
-	insight = 0
-	intimidation = 0
-	investigation = 0
-	medicine = 0
-	nature = 0
-	perception = 0
-	performance = 0
-	persuasion = 0
-	religion = 0
-	sleight_of_hand = 0
-	stealth = 0
-	survival = 0
+	skill_names = ("acrobatics", "animal handling", "arcana",
+				   "athletics", "deception", "history",
+				   "insight", "intimidation", "investigation",
+				   "medicine", "nature", "perception",
+				   "performance", "persuasion", "religion",
+				   "sleight of hand", "stealth", "survival")
+
+	skill_values = [0, 0, 0,
+					0, 0, 0,
+					0, 0, 0,
+					0, 0, 0,
+					0, 0, 0,
+					0, 0, 0]
+
 	passive_wisdom = 0
 
 	other_proficiences_languages = []
@@ -98,12 +96,13 @@ class Character:
 
 	def __init__(self):
 		"""init default variables"""
+		
 
-	def roll(self, num):
-		"""picks a number between 1 and num"""
-		a = random.randint(1,num)
-		print(a)
-		return a
+	# def roll(self, num):
+	# 	"""picks a number between 1 and num"""
+	# 	a = random.randint(1,num)
+	# 	print(a)
+	# 	return a
 
 	def disp_basic_stats(self):
 		"""Name, Class, Alignment, Background, XP, Armor Class, HP"""
@@ -113,6 +112,14 @@ class Character:
 		print("~~CLASSES~~")
 		for x in range(0, len(self.cla)):
 			print("{}: {}, {}".format(x+1, self.cla[x][0], self.cla[x][1]))
+
+	def disp_skills(self):
+		"""Skills"""
+		df = pandas.DataFrame(self.skill_values, self.skill_names)
+		new_header = df.iloc[0]
+		df = df[1:]
+		df.columns = new_header
+		print (df)
 
 	def disp_class(self):
 		"""Display Classes"""
@@ -129,7 +136,7 @@ class Character:
 
 	def edit_class_lvl(self, num, new_level):
 		"""change level of a class in cla"""
-		self.cla[num][1] = new_level
+		self.cla[num-1][1] = new_level
 
 	def disp_money(self):
 		"""prints balance"""
