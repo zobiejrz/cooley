@@ -1,6 +1,5 @@
 import random
-import pandas
-
+import pandas as pd
 class Character:
 	"""Stores and edits character data."""
 	# Page 1
@@ -46,19 +45,24 @@ class Character:
 	sav_wis = 0
 	sav_char = 0
 
-	skill_names = ("acrobatics", "animal handling", "arcana",
-				   "athletics", "deception", "history",
-				   "insight", "intimidation", "investigation",
-				   "medicine", "nature", "perception",
-				   "performance", "persuasion", "religion",
-				   "sleight of hand", "stealth", "survival")
-
-	skill_values = [0, 0, 0,
-					0, 0, 0,
-					0, 0, 0,
-					0, 0, 0,
-					0, 0, 0,
-					0, 0, 0]
+	skills = {"Acrobatics": 0,
+			  "Animal handling": 0,
+			  "Arcana": 0,
+			  "Athletics": 0,
+			  "Deception": 0,
+			  "History": 0,
+			  "Insight": 0,
+			  "Intimidation": 0,
+			  "Investigation": 0,
+			  "Medicine": 0,
+			  "Nature": 0,
+			  "Perception": 0,
+			  "Performance": 0,
+			  "Persuasion": 0,
+			  "Religion": 0,
+			  "Sleight of Hand": 0,
+			  "Stealth": 0,
+			  "Survival": 0}
 
 	passive_wisdom = 0
 
@@ -115,11 +119,9 @@ class Character:
 
 	def disp_skills(self):
 		"""Skills"""
-		df = pandas.DataFrame(self.skill_values, self.skill_names)
-		new_header = df.iloc[0]
-		df = df[1:]
-		df.columns = new_header
-		print (df)
+		df = pd.DataFrame.from_dict(data=self.skills, orient='index')
+		df.columns = ['']
+		print ("{}\n".format(df))
 
 	def disp_class(self):
 		"""Display Classes"""
