@@ -259,3 +259,6 @@ class Character:
 
 	# def update_variables(self):
 	# 	"""make sure skill atributes are updated with proficiency bonus"""
+
+	def dictionary_all_variables(self):
+		"""Returns a dictionary containing all character data"""
