@@ -2,6 +2,7 @@ import random
 import pandas as pd
 class Character:
 	"""Stores and edits character data."""
+	
 	# Page 1
 	name = "default"
 	cla = []
@@ -31,19 +32,12 @@ class Character:
 	proficiency_bonus = 0
 	inspiration = 0
 
-	stre = 0
-	dex = 0
-	const = 0
-	intel = 0
-	wisdom = 0
-	char = 0
-
-	sav_stre = 0
-	sav_dex = 0
-	sav_const = 0
-	sav_intel = 0
-	sav_wis = 0
-	sav_char = 0
+	abilities = {"Strength": [0,0,0],
+				 "Dexterity": [0,0,0],
+				 "Constitution": [0,0,0],
+				 "Intelligence": [0,0,0],
+				 "Wisdom": [0,0,0],
+				 "Charisma": [0,0,0]}
 
 	skills = {"Acrobatics": 0,
 			  "Animal handling": 0,
@@ -67,11 +61,13 @@ class Character:
 	passive_wisdom = 0
 
 	other_proficiences_languages = []
-	cp = 0
-	sp = 0
-	ep = 0
-	gp = 0
-	pp = 0
+
+	wallet = {"Copper Point": 0,
+			  "Silver Point": 0,
+			  "Electrum Point": 0,
+			  "Gold Point": 0,
+			  "Platinum Point": 0}
+
 	equipment = []
 	features_traits = []
 
@@ -123,6 +119,12 @@ class Character:
 		df.columns = ['']
 		print ("{}\n".format(df))
 
+	def disp_abilities(self):
+		"""Ability Scores, Modifiers, and Saving Throws"""
+		df = pd.DataFrame.from_dict(data=self.abilities, orient='index')
+		df.columns = ['Score', 'Modifier', 'Saving']
+		print ("{}\n".format(df))
+
 	def disp_class(self):
 		"""Display Classes"""
 		for x in range(0, len(self.cla)):
@@ -140,21 +142,19 @@ class Character:
 		"""change level of a class in cla"""
 		self.cla[num-1][1] = new_level
 
-	def disp_money(self):
+	def disp_wallet(self):
 		"""prints balance"""
-		print("Platinum: {}".format(self.pp))
-		print("Gold: {}".format(self.gp))
-		print("Electrum: {}".format(self.ep))
-		print("Silver: {}".format(self.sp))
-		print("Copper: {}".format(self.cp))
+		df = pd.DataFrame.from_dict(data=self.wallet, orient='index')
+		df.columns = ['Balance']
+		print ("{}\n".format(df))
 		
-	def edit_money(self, plat, gold, elec, silv, copp):
+	def edit_wallet(self, plat, gold, elec, silv, copp):
 		"""edits balance (handles negatives)"""
-		self.pp += plat
-		self.gp += gold
-		self.ep += elec
-		self.sp += silv
-		self.cp += copp
+		self.wallet["Copper Point"] += copp
+		self.wallet["Silver Point"] += silv
+		self.wallet["Electrum Point"] += elec
+		self.wallet["Gold Point"] += gold
+		self.wallet["Platinum Point"] += plat
 
 	def disp_attacks(self):
 		"""Prints Attacks from attacks"""
