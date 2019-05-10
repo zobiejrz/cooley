@@ -10,6 +10,17 @@ class Character:
 	race = "default"
 	align = "default"
 	xp = 0
+
+	info = {"Name": "",
+			"Background": "",
+			"Race": "",
+			"Alignment": "",
+			"Traits": "",
+			"Ideals": "",
+			"Bonds": "",
+			"Flaws": ""}
+
+	
 	
 	armor_class = 0
 	initiative = 0

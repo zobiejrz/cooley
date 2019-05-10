@@ -1,0 +1,4 @@
+/Users/ben/Documents/GitHub/dnd_character_storage/obj/Debug/netcoreapp2.2/dnd_character_storage.csprojAssemblyReference.cache
+/Users/ben/Documents/GitHub/dnd_character_storage/obj/Debug/netcoreapp2.2/dnd_character_storage.csproj.CoreCompileInputs.cache
+/Users/ben/Documents/GitHub/dnd_character_storage/obj/Debug/netcoreapp2.2/dnd_character_storage.AssemblyInfoInputs.cache
+/Users/ben/Documents/GitHub/dnd_character_storage/obj/Debug/netcoreapp2.2/dnd_character_storage.AssemblyInfo.cs
