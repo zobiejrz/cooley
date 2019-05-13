@@ -1,5 +1,13 @@
 ﻿using Discord;
+using Discord.Analyzers;
 using Discord.Commands;
+using Discord.API;
+using Discord.Audio;
+using Discord.Rest;
+using Discord.Rpc;
+using Discord.Webhook;
+using Discord.WebSocket;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,15 +17,12 @@ namespace dnd_character_storage
 {
     class Cooley
     {
-        static void Main(string[] args) => new Program().Start();
-        public Discord.DiscordSocketClient _client;
-        public void Start()
+        static void Main(string[] args) => new Cooley().Start().GetAwaiter().GetResult();
+        private DiscordSocketClient _client;
+        public async Task Start()
         {
-            _client = new DiscordSocketClient(x =>
-            {
-                x.AppName = " Cooley Bot ";
-                x.LogLevel = LogSeverity.Info;
-                x.LogHandler = Log;
+            _client = new DiscordSocketClient(new DiscordSocketConfig { 
+                WebSocketProvider = Discord.Net.Providers.WS4Net.WS4NetProvider.Instance
             });
 
             //set bot prefix
@@ -28,13 +33,12 @@ namespace dnd_character_storage
             // });
 
             var token = "-x-x-x";
-            _client.ExecuteAndWait(async () =>
-            {
-                await _client.Connect(token, TokenType.Bot);
-            });
-        }
+            await _client.LoginAsync(TokenType.Bot, token, true);
+            await _client.StartAsync();
+            await Task.Delay(-1);
 
-        public void Log(object sender, LogMessageEventArgs e)
+        }
+        public void Log(object sender, LogMessage e)
         {
             Console.WriteLine($"[{e.Severity}] - [{e.Source}] {e.Message}");
         }
