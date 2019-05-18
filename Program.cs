@@ -24,19 +24,40 @@ namespace dnd_character_storage
             _client = new DiscordSocketClient(new DiscordSocketConfig { 
                 WebSocketProvider = Discord.Net.Providers.WS4Net.WS4NetProvider.Instance
             });
+            /* Begin Commands */
 
-            //set bot prefix
-            // _client.UsingCommands(x => {
-            //     x.PrefixChar = '~'; //find how to set 2 character as prefix ";/"
-            //     x.AllowMentionPrefix = true;
-            //     x.HelpMode = HelpMode.Public;
-            // });
+            _client.Connected += async () => {
+                Console.WriteLine("SYS - Connected to Discord Gateway as " + _client.CurrentUser);
+                await Task.Delay(-1);
+            };
 
+            _client.Disconnected += async (e) => {
+                Console.WriteLine("ERR - " + e);
+                Console.WriteLine("ERR - Attempting to rejoin");
+                await Task.Delay(-1);
+            };
+
+            _client.JoinedGuild += async (g) => {
+                Console.WriteLine("SYS - Joined " + g.Name);
+                await g.DefaultChannel.SendMessageAsync("Hello everyone! Type '-help' to see a list of commands!");
+                await Task.Delay(-1);
+            };
+
+            _client.GuildAvailable += async (g) => {
+                Console.WriteLine("SYS - Connected to " + g.Name);
+                await Task.Delay(-1);
+            };
+
+            _client.LeftGuild += async (g) => {
+                Console.WriteLine("SYS - Left " + g.Name);
+                await Task.Delay(-1);
+            };
+
+            /* End Commands */
             var token = "-x-x-x";
             await _client.LoginAsync(TokenType.Bot, token, true);
             await _client.StartAsync();
             await Task.Delay(-1);
-
         }
         public void Log(object sender, LogMessage e)
         {
