@@ -9,3 +9,14 @@
 /Users/ben/Documents/GitHub/dnd_character_storage/bin/Debug/netcoreapp2.2/dnd_character_storage.pdb
 /Users/ben/Documents/GitHub/dnd_character_storage/obj/Debug/netcoreapp2.2/dnd_character_storage.dll
 /Users/ben/Documents/GitHub/dnd_character_storage/obj/Debug/netcoreapp2.2/dnd_character_storage.pdb
+/home/ben/Documents/GitHub/dnd_character_storage/bin/Debug/netcoreapp2.2/dnd_character_storage.deps.json
+/home/ben/Documents/GitHub/dnd_character_storage/bin/Debug/netcoreapp2.2/dnd_character_storage.runtimeconfig.json
+/home/ben/Documents/GitHub/dnd_character_storage/bin/Debug/netcoreapp2.2/dnd_character_storage.runtimeconfig.dev.json
+/home/ben/Documents/GitHub/dnd_character_storage/bin/Debug/netcoreapp2.2/dnd_character_storage.dll
+/home/ben/Documents/GitHub/dnd_character_storage/bin/Debug/netcoreapp2.2/dnd_character_storage.pdb
+/home/ben/Documents/GitHub/dnd_character_storage/obj/Debug/netcoreapp2.2/dnd_character_storage.csprojAssemblyReference.cache
+/home/ben/Documents/GitHub/dnd_character_storage/obj/Debug/netcoreapp2.2/dnd_character_storage.csproj.CoreCompileInputs.cache
+/home/ben/Documents/GitHub/dnd_character_storage/obj/Debug/netcoreapp2.2/dnd_character_storage.AssemblyInfoInputs.cache
+/home/ben/Documents/GitHub/dnd_character_storage/obj/Debug/netcoreapp2.2/dnd_character_storage.AssemblyInfo.cs
+/home/ben/Documents/GitHub/dnd_character_storage/obj/Debug/netcoreapp2.2/dnd_character_storage.dll
+/home/ben/Documents/GitHub/dnd_character_storage/obj/Debug/netcoreapp2.2/dnd_character_storage.pdb

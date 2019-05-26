@@ -8,6 +8,7 @@
   <ItemGroup>
     <PackageReference Include="Discord.Net" Version="2.0.1" />
     <PackageReference Include="Discord.Net.Analyzers" Version="2.0.1" />
+    <PackageReference Include="Discord.Net.Audio" Version="0.9.6" />
     <PackageReference Include="Discord.Net.Commands" Version="2.0.1" />
     <PackageReference Include="Discord.Net.Core" Version="2.0.1" />
     <PackageReference Include="Discord.Net.Providers.WS4Net" Version="2.0.1" />
