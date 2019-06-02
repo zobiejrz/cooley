@@ -17,5 +17,6 @@ namespace dnd_character_storage.Core.Command
             await Context.Message.DeleteAsync();
             await Context.Channel.SendMessageAsync (text);
         }
+
     }
 }

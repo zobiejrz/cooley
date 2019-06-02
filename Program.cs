@@ -17,13 +17,17 @@ using System.Reflection;
 
 namespace dnd_character_storage
 {
+
     class Cooley
     {
+
         static void Main(string[] args) => new Cooley().Start().GetAwaiter().GetResult();
         private DiscordSocketClient client;
         private CommandService commands;
+        public static Dictionary<SocketUser, string> selectedCharacters = new Dictionary<SocketUser, string>();
         public async Task Start()
         {
+            
             this.client = new DiscordSocketClient(new DiscordSocketConfig
             { 
                 WebSocketProvider = Discord.Net.Providers.WS4Net.WS4NetProvider.Instance
@@ -32,19 +36,19 @@ namespace dnd_character_storage
             this.commands = new CommandService(new CommandServiceConfig
             {
                 CaseSensitiveCommands = true,
-                
                 DefaultRunMode = RunMode.Async,
                 LogLevel = LogSeverity.Debug
             });
 
             this.client.Connected += async () =>
             {
-                Console.WriteLine("SYS - Connected to Discord Gateway as " + this.client.CurrentUser);
+                Console.WriteLine( $"SYS - Connected to Discord Gateway as {this.client.CurrentUser}" );
                 await Task.Delay(-1);
             };
 
             this.client.Disconnected += async (e) =>
             {
+
                 Console.WriteLine("ERR - Disconnected from Discord Gateway: " + e.Message);
                 await Task.Delay(-1);
             };
@@ -63,15 +67,15 @@ namespace dnd_character_storage
 
                 var Result = await this.commands.ExecuteAsync(Context, argPos, null, MultiMatchHandling.Best);
 
-                if (!Result.IsSuccess) {
+                if (!Result.IsSuccess)
+                {
                     Console.WriteLine("ERR - Command `" + Context.Message + "` could not be completed: " + Result.ErrorReason);
                 }
             };
-
             // Adds the commands to the Command Service
             await this.commands.AddModulesAsync(Assembly.GetEntryAssembly(), null);
 
-            var token = "NTc2MjYzODE4ODA0NTkyNjYy.XOqSSw.T_RUHXkaqeoG0Ioc8XoIsAH4dhg";
+            var token = "-x-x-x";
 
             // Tries logging in using var token otherwise trys again
             try
@@ -87,9 +91,5 @@ namespace dnd_character_storage
             }
             
         }
-        // public void Log(object sender, LogMessage e)
-        // {
-        //     Console.WriteLine($"[{e.Severity}] - [{e.Source}]: {e.Message}");
-        // }
     }
 }

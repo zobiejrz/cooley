@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Discord.WebSocket;
 
 namespace dnd_character_storage.Resources.Datatypes
 {
@@ -7,11 +8,14 @@ namespace dnd_character_storage.Resources.Datatypes
     public class character
     {
 
+        public SocketUser owner;
         public Dictionary<string, string> basicInfo;
         public Dictionary<string, int> wallet;
 
-        public character(string name, string race, string alignment)
+        public character(SocketUser owner, string name, string race, string alignment)
         {
+            this.owner = owner;
+
             this.basicInfo.Add("name", name);
             this.basicInfo.Add("race", race);
             this.basicInfo.Add("alignment", alignment);
