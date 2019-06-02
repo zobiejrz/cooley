@@ -14,6 +14,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
+using System.IO;
+
+using Newtonsoft.Json;
 
 namespace dnd_character_storage
 {
@@ -72,15 +75,17 @@ namespace dnd_character_storage
                     Console.WriteLine("ERR - Command `" + Context.Message + "` could not be completed: " + Result.ErrorReason);
                 }
             };
+
             // Adds the commands to the Command Service
             await this.commands.AddModulesAsync(Assembly.GetEntryAssembly(), null);
 
-            var token = "-x-x-x";
-
-            // Tries logging in using var token otherwise trys again
+            // var token = JsonConvert.DeserializeObject<Token>(json);
+            var auth = File.ReadAllText(@"/home/ben/Documents/GitHub/dnd_character_storage/auth.txt");
+            
+            // Continually tries logging in until successful every 2 seconds
             try
             {
-                await this.client.LoginAsync(TokenType.Bot, token, true);
+                await this.client.LoginAsync(TokenType.Bot, auth, true);
                 await this.client.StartAsync();
                 await Task.Delay(-1);
             } catch (Exception e) {
