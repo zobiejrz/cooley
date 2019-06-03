@@ -36,6 +36,7 @@ namespace dnd_character_storage.Core.Command
         [Command("new")]
         public async Task NewWithoutParam()
         {
+            checkIfNewUser(Context.User);
             await ReplyAsync( $"{Context.User.Mention} what am I supposed to name your character? Try again by typing -player new <name>" );
         }
         [Command("select")]
@@ -55,7 +56,7 @@ namespace dnd_character_storage.Core.Command
         [Command("select")]
         public async Task SelectWithoutParam()
         {
-
+            checkIfNewUser(Context.User);
             if (Cooley.selectedCharacters[Context.User] != null)
             {
                 await ReplyAsync( $"{Context.User.Mention} you have currently selected {Cooley.selectedCharacters[Context.User]} as your character." );
@@ -63,12 +64,56 @@ namespace dnd_character_storage.Core.Command
             else
             {
                 await ReplyAsync( $"{Context.User.Mention} you don't have a character selected! Try -player select <name> or -player new <name> to get started" );
+            }  
+        }
+        [Command("delete")]
+        public async Task delete([Remainder] string name)
+        {
+            checkIfNewUser(Context.User);
+            if ( isNewCharacter(Context.User, name) )
+            {
+                await ReplyAsync ( $"{Context.User.Mention} that character doesn't exist, so I can't delete it. Maybe try something else?" );
+            }
+            else
+            {
+                File.Delete ( $"/home/ben/Documents/GitHub/dnd_character_storage/Resources/CharacterData/{Context.User.ToString()}/{name}.csv" );
+                await ReplyAsync ( $"{Context.User.Mention} I've snapped {name} out of existance! No stones to bring them back this time." );
+                if ( Cooley.selectedCharacters[Context.User] == name )
+                {
+                    Cooley.selectedCharacters.Remove(Context.User);
+                }
             }
             
         }
+        [Command("delete")]
+        public async Task DeleteWithoutParam()
+        {
+            await ReplyAsync  ( $"{Context.User.Mention} I'm sorry, but you didn't type in a name to delete! Try typing -player delete <name> or -player list to find the one you hate most" );
+        }
+        [Command("list")]
+        public async Task List()
+        {
+            string[] filePaths = Directory.GetFileSystemEntries($"/home/ben/Documents/GitHub/dnd_character_storage/Resources/CharacterData/{Context.User.ToString()}", "*.csv" );
+            var list = "";
+            foreach ( string filepath in filePaths )
+            {
+                var currentFile = filepath.Substring(74 + Context.User.ToString().Length);
+                list += currentFile.Split(".csv")[0];
+                list += "\n";
+            }
 
-    
-        
+            if ( list != "")
+            {
+                await ReplyAsync ( $"{Context.User.Mention} here are your characters:\n{list}" );
+            }
+            else
+            {
+                await ReplyAsync ( $"{Context.User.Mention} you don't have any characters to list! Use -player new <name> to make your first one!" );
+            }
+            
+            
+        }
+
         public static Boolean isNewCharacter(SocketUser user, String name)
         {
             string dir = @"/home/ben/Documents/GitHub/dnd_character_storage/Resources/CharacterData/" + user.ToString() + "/" + name + ".csv";

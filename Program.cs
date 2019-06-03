@@ -79,16 +79,17 @@ namespace dnd_character_storage
             // Adds the commands to the Command Service
             await this.commands.AddModulesAsync(Assembly.GetEntryAssembly(), null);
 
-            // var token = JsonConvert.DeserializeObject<Token>(json);
-            var auth = File.ReadAllText(@"/home/ben/Documents/GitHub/dnd_character_storage/auth.txt");
+            var token = "-x-x-x";
             
             // Continually tries logging in until successful every 2 seconds
             try
             {
-                await this.client.LoginAsync(TokenType.Bot, auth, true);
+                await this.client.LoginAsync(TokenType.Bot, token, true);
                 await this.client.StartAsync();
                 await Task.Delay(-1);
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 Console.WriteLine("ERR - Log in failed: " + e.Message );
                 Console.WriteLine("ERR - Trying to log in again...");
                 System.Threading.Thread.Sleep(2000);

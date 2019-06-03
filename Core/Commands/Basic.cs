@@ -17,6 +17,11 @@ namespace dnd_character_storage.Core.Command
             await Context.Message.DeleteAsync();
             await Context.Channel.SendMessageAsync (text);
         }
+        [Command("ask")]
+        public async Task ask([Remainder] string text)
+        {
+            if (text.ToLower() == "what is the primary goal") await ReplyAsync ( $"{Context.User.Mention} to win the game." );
+        }
 
     }
 }
