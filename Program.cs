@@ -18,6 +18,9 @@ using System.IO;
 
 using Newtonsoft.Json;
 
+using dnd_character_storage.Resources.Datatypes;
+
+
 namespace dnd_character_storage
 {
 
@@ -27,7 +30,7 @@ namespace dnd_character_storage
         static void Main(string[] args) => new Cooley().Start().GetAwaiter().GetResult();
         private DiscordSocketClient client;
         private CommandService commands;
-        public static Dictionary<SocketUser, string> selectedCharacters = new Dictionary<SocketUser, string>();
+        public static Dictionary<SocketUser, Character> selectedCharacters = new Dictionary<SocketUser, Character>();
         public async Task Start()
         {
             

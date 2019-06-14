@@ -1,0 +1,67 @@
+{
+    "name": "god",
+    "owner": "default",
+    "profession": [],
+    "race": 0,
+    "alignment": 0,
+    "maxHP": 0,
+    "tempHP": 0,
+    "currentHP": 0,
+    "abilities": {
+
+        "Strength": {
+            "Base": 0,
+            "Modifier": 0,
+            "Saving": 0
+        },
+
+        "Dexterity": {
+            "Base": 0,
+            "Modifier": 0,
+            "Saving": 0
+        },
+
+        "Constitution": {
+            "Base": 0,
+            "Modifier": 0,
+            "Saving": 0
+        },
+
+        "Intelligence": {
+            "Base": 0,
+            "Modifier": 0,
+            "Saving": 0
+        },
+        
+        "Charisma": {
+            "Base": 0,
+            "Modifier": 0,
+            "Saving": 0
+        }
+
+    },
+
+    "profBonus": 0,
+
+    "skills": {
+        "Acrobatics": 0,
+        "Animal handling": 0,
+        "Arcana": 0,
+        "Athletics": 0,
+        "Deception": 0,
+        "History": 0,
+        "Insight": 0,
+        "Intimidation": 0,
+        "Investigation": 0,
+        "Medicine": 0,
+        "Nature": 0,
+        "Perception": 0,
+        "Performance": 0,
+        "Persuasion": 0,
+        "Religion": 0,
+        "Sleight of Hand": 0,
+        "Stealth": 0,
+        "Survival": 0
+    }
+
+}
