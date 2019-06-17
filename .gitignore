@@ -1,5 +1,4 @@
 
 *.pyc
-*.json
 Resources/auth.json
 auth.txt
