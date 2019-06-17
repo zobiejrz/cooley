@@ -1,2 +1,2 @@
 # dnd_character_storage
-Stores, edits, and uses Dungeon and Dragons character data
+A Discord Bot that stores, edits, and lets you use Dungeon and Dragons character sheets! 
