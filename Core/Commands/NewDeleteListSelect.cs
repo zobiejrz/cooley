@@ -1,47 +1,35 @@
 ﻿using System;
 using System.Text;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using System.IO;
-
-using Discord;
-using Discord.Analyzers;
 using Discord.Commands;
-using Discord.API;
-using Discord.Audio;
-using Discord.Rest;
-using Discord.Rpc;
-using Discord.Webhook;
 using Discord.WebSocket;
 
 using dnd_character_storage.Resources.Datatypes;
-
+using System.Security.Cryptography;
 using Newtonsoft.Json;
 
 namespace dnd_character_storage.Core.Commands
 {
-    [Group("player")]
+    [Group("player"), Alias("p")]
     public class NewDeleteListSelect : ModuleBase<SocketCommandContext>
     {
         //
         // This Group is only to add/delete/list/select character files
-        //
-        // ~~~~~BUGS~~~~~
-        // 1. -player new ../player/name will make a new file called name.json in a player directory in CharacterData
-        // string
+        // 
+        // TODO: Change variables like playerDir so that it isn't dependant on device.
+
         [Command("new"), Alias("n")]
         public async Task New([Remainder] string name)
         {
             checkIfNewUser(Context.User);
             if (isNewCharacter(Context.User, name))
             {
-                var playerDir = $"/home/ben/Documents/GitHub/dnd_character_storage/Resources/CharacterData/{Context.User}/{name}.json";
                 Character character = new Character();
-
                 character.Name = name;
                 character.Owner = Context.User.ToString();
-                serialize(playerDir, character);
-
+                character.Serial = getHashString(Context.User + getTimestamp());
+                serialize(character);
                 await ReplyAsync( Context.User.Mention + ", I finished your new character, " + character.Name + ". Use the -player select <name> command to select the character." );
             }
             else
@@ -59,58 +47,65 @@ namespace dnd_character_storage.Core.Commands
         public async Task Select([Remainder] string name)
         {
             checkIfNewUser(Context.User);
-            var playerDir = $"/home/ben/Documents/GitHub/dnd_character_storage/Resources/CharacterData/{Context.User}/{name}.json";
-
+            var playerDir = $"/home/ben/Documents/GitHub/dnd_character_storage/Resources/CharacterData/{Context.User}/{getSerialByName(name)}.json";
             // read file into a string and deserialize JSON to a type
-            Character character = new Character();
-            character = deserialize(playerDir);
 
-            if (isNewCharacter(Context.User, character.Name))
+            if (playerHasCharacter(name))
             {
-                await ReplyAsync( Context.User.Mention + " that character doesn't exist or doesn't belong to you. Try selecting a different character, or '-player new <name>'. Use '-player list' to see all your characters." );
+                Character character = new Character();
+                character = deserialize(playerDir);
+                if ( Cooley.selectedCharacters.ContainsKey(Context.User.ToString()) )
+                {
+                    Cooley.selectedCharacters[Context.User.ToString()] = character;
+                }
+                else
+                {
+                    Cooley.selectedCharacters.Add(Context.User.ToString(), character);
+                }
+                await ReplyAsync($"{Context.User.Mention} has selected {character.Name} to be their character.");
             }
             else
             {
-                Cooley.selectedCharacters.Add( Context.User, character );
-                await ReplyAsync ( Context.User.Mention + " has selected " + character.Name + " to be their character." );
+                await ReplyAsync($"{Context.User.Mention} you don't have that character. Try selecting a different character, or '-player new <name>'. Use '-player list' to see all your characters.");
             }
         }
         [Command("select"), Alias("s")]
         public async Task SelectWithoutParam()
         {
             checkIfNewUser(Context.User);
-            if (Cooley.selectedCharacters[Context.User] != null)
+            
+            if (!Cooley.selectedCharacters.TryGetValue(Context.User.ToString(), out Character value))
             {
-                await ReplyAsync( $"{Context.User.Mention} you have currently selected {Cooley.selectedCharacters[Context.User]} as your character." );
+                await ReplyAsync($"{Context.User.Mention} you don't have a character selected! Try -player select <name> or -player new <name> to get started");
             }
             else
             {
-                await ReplyAsync( $"{Context.User.Mention} you don't have a character selected! Try -player select <name> or -player new <name> to get started" );
-            }  
+                await ReplyAsync($"{Context.User.Mention} you have currently selected {Cooley.selectedCharacters[Context.User.ToString()].Name} as your character.");
+            }
         }
         [Command("delete"), Alias("d")]
         public async Task delete([Remainder] string name)
         {
             checkIfNewUser(Context.User);
 
-            var playerDir = $"/home/ben/Documents/GitHub/dnd_character_storage/Resources/CharacterData/{Context.User}/{name}.json";
+            var playerDir = $"/home/ben/Documents/GitHub/dnd_character_storage/Resources/CharacterData/{Context.User}/{getSerialByName(name)}.json";
             
             // read file into a string and deserialize JSON to a type
             Character character = new Character();
             character = deserialize(playerDir);
 
-            if ( isNewCharacter(Context.User, name) )
+            if ( !playerHasCharacter(name) )
             {
                 await ReplyAsync ( $"{Context.User.Mention} that character doesn't exist, so I can't delete it. Maybe try something else?" );
             }
             else
             {
-                File.Delete ( $"/home/ben/Documents/GitHub/dnd_character_storage/Resources/CharacterData/{Context.User.ToString()}/{name}.json" );
-                await ReplyAsync ( $"{Context.User.Mention} I've snapped {name} out of existance! No stones to bring them back this time." );
-                if ( Cooley.selectedCharacters[Context.User] == character )
+                if ( Cooley.selectedCharacters[Context.User.ToString()].Name == character.Name )
                 {
-                    Cooley.selectedCharacters.Remove(Context.User);
+                    Cooley.selectedCharacters.Remove(Context.User.ToString());
                 }
+                File.Delete ( $"/home/ben/Documents/GitHub/dnd_character_storage/Resources/CharacterData/{Context.User.ToString()}/{getSerialByName(name)}.json" );
+                await ReplyAsync ( $"{Context.User.Mention} I've snapped {name} out of existance! No stones to bring them back this time." ); 
             }
         }
         [Command("delete"), Alias("d")]
@@ -125,11 +120,8 @@ namespace dnd_character_storage.Core.Commands
             var list = "";
             foreach ( string filepath in filePaths )
             {
-                // THIS IS WHERE BUGS WILL COME FROM WHEN THE COMPUTERS CHANGE
-                //                         |
-                //                        \|/
-                //                         v
-                list += filepath.Substring(74 + Context.User.ToString().Length).Split(".json")[0];
+                Character _ = deserialize(filepath);
+                list += $"'{_.Name}'";
                 list += "\n";
             }
 
@@ -144,22 +136,20 @@ namespace dnd_character_storage.Core.Commands
             
             
         }
-
-        public static Boolean isNewCharacter(SocketUser user, String name)
+        public Boolean isNewCharacter(SocketUser user, String name)
         {
-            string dir = @"/home/ben/Documents/GitHub/dnd_character_storage/Resources/CharacterData/" + user.ToString() + "/" + name + ".json";
+            string dir = $"/home/ben/Documents/GitHub/dnd_character_storage/Resources/CharacterData/{user.ToString()}/{getSerialByName(name)}.json";
             if (File.Exists(dir)) return false;
             return true;
         }
 
-        public static void checkIfNewUser(SocketUser user)
+        public void checkIfNewUser(SocketUser user)
         {
-            string dir = @"/home/ben/Documents/GitHub/dnd_character_storage/Resources/CharacterData/";
-            string folder = user.ToString();
+            string dir = $"/home/ben/Documents/GitHub/dnd_character_storage/Resources/CharacterData/{user.ToString()}";
             // If directory does not exist, create it. 
-            if (!Directory.Exists(dir + folder))
+            if (!Directory.Exists(dir))
             {
-                Directory.CreateDirectory( dir + folder);
+                Directory.CreateDirectory( dir );
             }
         }
         private Character deserialize(String playerDir)
@@ -168,9 +158,58 @@ namespace dnd_character_storage.Core.Commands
             return JsonConvert.DeserializeObject<Character>(file);
         }
 
-        private void serialize(String playerDir, Character character)
+        private void serialize(Character character)
         {
+            var playerDir = $"/home/ben/Documents/GitHub/dnd_character_storage/Resources/CharacterData/{character.Owner}/{character.Serial}.json";
             File.WriteAllText(playerDir, JsonConvert.SerializeObject(character));
+        }
+        
+        private string getSerialByName(string name)
+        {
+            string[] filePaths = Directory.GetFileSystemEntries($"/home/ben/Documents/GitHub/dnd_character_storage/Resources/CharacterData/{Context.User.ToString()}", "*.json" );
+            string value = "NONE";
+            foreach ( string filepath in filePaths )
+            {
+                Character _ = deserialize(filepath);
+                if ( _.Name == name ) 
+                {
+                    value = _.Serial;
+                    break;
+                }
+            }
+            return value;
+        }
+        private Boolean playerHasCharacter(string name)
+        {
+            string[] filePaths = Directory.GetFileSystemEntries($"/home/ben/Documents/GitHub/dnd_character_storage/Resources/CharacterData/{Context.User.ToString()}", "*.json" );
+            Boolean value = false;
+            foreach ( string filepath in filePaths )
+            {
+                Character _ = deserialize(filepath);
+                if ( _.Name == name ) 
+                {
+                    value = true;
+                    break;
+                }
+            }
+            return value;
+        }
+        private byte[] getHash(string inputString)
+        {
+            HashAlgorithm algorithm = SHA256.Create();
+            return algorithm.ComputeHash(Encoding.UTF8.GetBytes(inputString));
+        }
+        private string getHashString(string inputString)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (byte b in getHash(inputString))
+                sb.Append(b.ToString("X2"));
+
+            return sb.ToString();
+        }
+        private string getTimestamp()
+        {
+            return DateTime.Now.ToString("yyyyMMddHHmmssffff");
         }
     }
 

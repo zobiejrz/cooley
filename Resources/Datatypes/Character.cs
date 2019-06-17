@@ -11,8 +11,9 @@ namespace dnd_character_storage.Resources.Datatypes
     {
         public string Name            { get; set; }
         public string Owner           { get; set; }
+        public string Serial          { get; set; }
         public Profession Professions { get; set; }
-        public Races Race              { get; set; }
+        public Races Race             { get; set; }
         public Alignment Alignment    { get; set; }
         public int MaxHP              { get; set; }
         public int TempHP             { get; set; }
@@ -32,18 +33,17 @@ namespace dnd_character_storage.Resources.Datatypes
             this.Abilities.zero();
             this.ProfBonus = 0;
             this.Skills.zero();
-
         }
     }
 
     public class Abilities
     {
 
-        SubAbility Strength;
-        SubAbility Dexterity;
-        SubAbility Constitution;
-        SubAbility Intelligence;
-        SubAbility Charisma;
+        SubAbility Strength         { get; set; }
+        SubAbility Dexterity        { get; set; }
+        SubAbility Constitution     { get; set; }
+        SubAbility Intelligence     { get; set; }
+        SubAbility Charisma         { get; set; }
         
 
         public void zero()
@@ -51,15 +51,19 @@ namespace dnd_character_storage.Resources.Datatypes
             Strength.Base = 0;
             Strength.Modifier = 0;
             Strength.Saving = 0;
+
             Dexterity.Base = 0;
             Dexterity.Modifier = 0;
             Dexterity.Saving = 0;
+
             Constitution.Base = 0;
             Constitution.Modifier = 0;
             Constitution.Saving = 0;
+
             Intelligence.Base = 0;
             Intelligence.Modifier = 0;
             Intelligence.Saving = 0;
+            
             Charisma.Base = 0;
             Charisma.Modifier = 0;
             Charisma.Saving = 0;
@@ -68,52 +72,52 @@ namespace dnd_character_storage.Resources.Datatypes
 
     public class SubAbility
     {
-        public int Base { get; set; }
-        public int Modifier { get; set; }
-        public int Saving { get; set; }
+        public int Base         { get; set; }
+        public int Modifier     { get; set; }
+        public int Saving       { get; set; }
     }
 
     public class Skills
     {
-        public int acrobatics{ get; set; }        
-        public int animalHandeling{ get; set; }
-        public int arcana{ get; set; }
-        public int athletics{ get; set; }
-        public int deception{ get; set; }
-        public int history{ get; set; }
-        public int insight{ get; set; }
-        public int intimidation{ get; set; }
-        public int investigation{ get; set; }
-        public int medicine{ get; set; }
-        public int nature{ get; set; }
-        public int perception{ get; set; }
-        public int performance{ get; set; }
-        public int persuasion{ get; set; }
-        public int religion{ get; set; }
-        public int sleightOfHand{ get; set; }
-        public int stealth{ get; set; }
-        public int survival{ get; set; } 
+        public int Acrobatics       { get; set; }        
+        public int AnimalHandeling  { get; set; }
+        public int Arcana           { get; set; }
+        public int Athletics        { get; set; }
+        public int Deception        { get; set; }
+        public int History          { get; set; }
+        public int Insight          { get; set; }
+        public int Intimidation     { get; set; }
+        public int Investigation    { get; set; }
+        public int Medicine         { get; set; }
+        public int Nature           { get; set; }
+        public int Perception       { get; set; }
+        public int Performance      { get; set; }
+        public int Persuasion       { get; set; }
+        public int Religion         { get; set; }
+        public int SleightOfHand    { get; set; }
+        public int Stealth          { get; set; }
+        public int Survival         { get; set; } 
 
         public void zero()
         {
-            this.acrobatics = 0;
-            this.animalHandeling = 0;
-            this.arcana = 0;
-            this.athletics = 0;
-            this.deception = 0;
-            this.history = 0;
-            this.insight = 0;
-            this.intimidation = 0;
-            this.investigation = 0;
-            this.medicine = 0;
-            this.nature = 0;
-            this.perception = 0;
-            this.performance = 0;
-            this.persuasion = 0;
-            this.religion = 0;
-            this.sleightOfHand = 0;
-            this.stealth = 0;
-            this.survival = 0;
+            this.Acrobatics = 0;
+            this.AnimalHandeling = 0;
+            this.Arcana = 0;
+            this.Athletics = 0;
+            this.Deception = 0;
+            this.History = 0;
+            this.Insight = 0;
+            this.Intimidation = 0;
+            this.Investigation = 0;
+            this.Medicine = 0;
+            this.Nature = 0;
+            this.Perception = 0;
+            this.Performance = 0;
+            this.Persuasion = 0;
+            this.Religion = 0;
+            this.SleightOfHand = 0;
+            this.Stealth = 0;
+            this.Survival = 0;
         }      
 }
 

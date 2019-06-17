@@ -1,39 +1,25 @@
 ﻿using Discord;
-using Discord.Analyzers;
 using Discord.Commands;
-using Discord.API;
-using Discord.Audio;
-using Discord.Rest;
-using Discord.Rpc;
-using Discord.Webhook;
 using Discord.WebSocket;
-
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
-using System.IO;
-
-using Newtonsoft.Json;
-
 using dnd_character_storage.Resources.Datatypes;
 
 
 namespace dnd_character_storage
 {
-
     class Cooley
     {
 
         static void Main(string[] args) => new Cooley().Start().GetAwaiter().GetResult();
         private DiscordSocketClient client;
         private CommandService commands;
-        public static Dictionary<SocketUser, Character> selectedCharacters = new Dictionary<SocketUser, Character>();
+        public static Dictionary<String, Character> selectedCharacters;
         public async Task Start()
         {
-            
+            selectedCharacters = new Dictionary<String, Character>();
             this.client = new DiscordSocketClient(new DiscordSocketConfig
             { 
                 WebSocketProvider = Discord.Net.Providers.WS4Net.WS4NetProvider.Instance
@@ -75,14 +61,14 @@ namespace dnd_character_storage
 
                 if (!Result.IsSuccess)
                 {
-                    Console.WriteLine("ERR - Command `" + Context.Message + "` could not be completed: " + Result.ErrorReason);
+                    Console.WriteLine("ERR - Command `" + Context.Message + "` could not be completed:\n\t" + Result.ErrorReason);
                 }
             };
 
             // Adds the commands to the Command Service
             await this.commands.AddModulesAsync(Assembly.GetEntryAssembly(), null);
 
-            var token = "-x-x-x";
+            var token = "NTc2MjYzODE4ODA0NTkyNjYy.XQaI5g.zStslDbHXJXmZyvzkrXpt-rsTF0";
             
             // Continually tries logging in until successful every 2 seconds
             try
