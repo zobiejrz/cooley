@@ -6,44 +6,52 @@ namespace dnd_character_storage.Resources.Datatypes
 {
 
   [Serializable]
-
     public class Character
     {
-        public string Name            { get; set; }
-        public string Owner           { get; set; }
-        public string Serial          { get; set; }
-        public Profession Professions { get; set; }
-        public Races Race             { get; set; }
-        public Alignment Alignment    { get; set; }
-        public int MaxHP              { get; set; }
-        public int TempHP             { get; set; }
-        public int CurrentHP          { get; set; }
-        public Abilities Abilities    { get; set; }
-        public int ProfBonus          { get; set; }
-        public Skills Skills          { get; set; }
+        public string Name                  { get; set; }
+        public string Owner                 { get; set; }
+        public string Serial                { get; set; }
+        public Professions Profession       { get; set; }
+        public Races Race                   { get; set; }
+        public Alignments Alignment          { get; set; }
+        public int MaxHP                    { get; set; }
+        public int TempHP                   { get; set; }
+        public int CurrentHP                { get; set; }
+        public Abilities Abilities          { get; set; }
+        public int ProfBonus                { get; set; }
+        public Skills Skills                { get; set; }
 
         public void zero()
         {
-            this.Professions = Profession.artificer;
+            try
+            {
+
+            
+            this.Profession = Professions.none;
             this.Race = Races.human;
-            this.Alignment = Alignment.trueneutral;
+            this.Alignment = Alignments.trueneutral;
             this.MaxHP = 0;
             this.TempHP = 0;
             this.CurrentHP = 0;
             this.Abilities.zero();
             this.ProfBonus = 0;
             this.Skills.zero();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
     }
-
     public class Abilities
     {
 
-        SubAbility Strength         { get; set; }
-        SubAbility Dexterity        { get; set; }
-        SubAbility Constitution     { get; set; }
-        SubAbility Intelligence     { get; set; }
-        SubAbility Charisma         { get; set; }
+        public SubAbility Strength         { get; set; }
+        public SubAbility Dexterity        { get; set; }
+        public SubAbility Constitution     { get; set; }
+        public SubAbility Intelligence     { get; set; }
+        public SubAbility Charisma         { get; set; }
         
 
         public void zero()
@@ -69,12 +77,79 @@ namespace dnd_character_storage.Resources.Datatypes
             Charisma.Saving = 0;
         }
     }
-
     public class SubAbility
     {
         public int Base         { get; set; }
         public int Modifier     { get; set; }
         public int Saving       { get; set; }
+        public void UpdateModifier()
+        {
+            if ( Base <= 1 )
+            {
+                Modifier = -5;
+            }
+            else if ( Base <= 3 )
+            {
+                Modifier = -4;
+            }
+            else if ( Base <= 5 )
+            {
+                Modifier = -3;
+            }
+            else if ( Base <= 7 )
+            {
+                Modifier = -2;
+            }
+            else if ( Base <= 9 )
+            {
+                Modifier = -1;
+            }
+            else if ( Base <= 11 )
+            {
+                Modifier = 0;
+            }
+            else if ( Base <= 13 )
+            {
+                Modifier = 1;
+            }
+            else if ( Base <= 15 )
+            {
+                Modifier = 2;
+            }
+            else if ( Base <= 17 )
+            {
+                Modifier = 3;
+            }
+            else if ( Base <= 19 )
+            {
+                Modifier = 4;
+            }
+            else if ( Base <= 21 )
+            {
+                Modifier = 5;
+            }
+            else if ( Base <= 23 )
+            {
+                Modifier = 6;
+            }
+            else if ( Base <= 25 )
+            {
+                Modifier = 7;
+            }
+            else if ( Base <= 27 )
+            {
+                Modifier = 8;
+            }
+            else if ( Base <= 29 )
+            {
+                Modifier = 9;
+            }
+            else
+            {
+                Modifier = 10;
+            }
+        }
+
     }
 
     public class Skills
@@ -119,9 +194,9 @@ namespace dnd_character_storage.Resources.Datatypes
             this.Stealth = 0;
             this.Survival = 0;
         }      
-}
+    }
 
-    public enum Profession
+    public enum Professions
     {
         none = 0,
         barbarian,
@@ -186,7 +261,7 @@ namespace dnd_character_storage.Resources.Datatypes
         vedalken
     }
 
-    public enum Alignment
+    public enum Alignments
     {
         lawfulgood = 0,
         lawfulneutral,

@@ -17,7 +17,6 @@ namespace dnd_character_storage.Core.Commands
         //
         // This Group is only to add/delete/list/select character files
         // 
-        // TODO: Change variables like playerDir so that it isn't dependant on device.
 
         [Command("new"), Alias("n")]
         public async Task New([Remainder] string name)
@@ -30,6 +29,26 @@ namespace dnd_character_storage.Core.Commands
                 character.Owner = Context.User.ToString();
                 var tempSerial = $"{Context.User.ToString()}{getTimestamp()}";
                 character.Serial = getHashString(tempSerial);
+                
+                character.Profession = Professions.none;
+                character.Race = Races.human;
+                character.Alignment = Alignments.trueneutral;
+                character.MaxHP = 0;
+                character.TempHP = 0;
+                character.CurrentHP = 0;
+
+                character.Abilities = new Abilities();
+                character.Abilities.Strength = new SubAbility();
+                character.Abilities.Dexterity = new SubAbility();
+                character.Abilities.Constitution = new SubAbility();
+                character.Abilities.Intelligence = new SubAbility();
+                character.Abilities.Charisma = new SubAbility();
+
+                character.ProfBonus = 0;
+
+                character.Skills = new Skills();
+                character.zero();
+
                 serialize(character);
                 await ReplyAsync( Context.User.Mention + ", I finished your new character, " + character.Name + ". Use the -player select <name> command to select the character." );
             }
@@ -96,29 +115,37 @@ namespace dnd_character_storage.Core.Commands
         [Command("delete"), Alias("d")]
         public async Task delete([Remainder] string name)
         {
-            checkIfNewUser(Context.User);
-            if ( !playerHasCharacter(name) )
+            try
             {
-                await ReplyAsync ( $"{Context.User.Mention} that character doesn't exist, so I can't delete it. Maybe try something else?" );
-            }
-            else
-            {
-                // var playerDir = $"/home/ben/Documents/GitHub/dnd_character_storage/Resources/CharacterData/{Context.User}/{getSerialByName(name)}.json";
-                var tempDir = $"Resources/CharacterData/{Context.User.ToString()}/{getSerialByName(name)}.json";
-                var dir = System.IO.Path.GetFullPath(tempDir);
 
-                // read file into a string and deserialize JSON to a type
-                Character character = new Character();
-                character = deserialize(dir);
-
-                if ( Cooley.selectedCharacters[Context.User.ToString()].Name == character.Name )
+                checkIfNewUser(Context.User);
+                if ( !playerHasCharacter(name) )
                 {
-                    Cooley.selectedCharacters.Remove(Context.User.ToString());
+                    await ReplyAsync ( $"{Context.User.Mention} that character doesn't exist, so I can't delete it. Maybe try something else?" );
                 }
-                // File.Delete ( $"/home/ben/Documents/GitHub/dnd_character_storage/Resources/CharacterData/{Context.User.ToString()}/{getSerialByName(name)}.json" );
-                File.Delete( dir );
+                else
+                {
+                    // var playerDir = $"/home/ben/Documents/GitHub/dnd_character_storage/Resources/CharacterData/{Context.User}/{getSerialByName(name)}.json";
+                    var tempDir = $"Resources/CharacterData/{Context.User.ToString()}/{getSerialByName(name)}.json";
+                    var dir = System.IO.Path.GetFullPath(tempDir);
 
-                await ReplyAsync ( $"{Context.User.Mention} I've snapped {name} out of existance! No stones to bring them back this time." ); 
+                    // read file into a string and deserialize JSON to a type
+                    Character character = new Character();
+                    character = deserialize(dir);
+
+                    if ( Cooley.selectedCharacters.TryGetValue(Context.User.ToString(), out Character c)  && c.Name == character.Name )
+                    {
+                        Cooley.selectedCharacters.Remove(Context.User.ToString());
+                    }
+                    // File.Delete ( $"/home/ben/Documents/GitHub/dnd_character_storage/Resources/CharacterData/{Context.User.ToString()}/{getSerialByName(name)}.json" );
+                    File.Delete( dir );
+
+                    await ReplyAsync ( $"{Context.User.Mention} I've snapped {name} out of existance! No stones to bring them back this time." ); 
+                }
+            }
+            catch ( Exception e )
+            {
+                Console.WriteLine (e);
             }
         }
         [Command("delete"), Alias("d")]
