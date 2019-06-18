@@ -5,10 +5,10 @@ using dnd_character_storage.Resources.Datatypes;
 namespace dnd_character_storage.Core.Commands
 {
     [Group("check"), Alias("c")]
-    public class Check : ModuleBase<SocketCommandContext>
+    public class Check : Command
     {
         [Command("strength"), Alias("s")]
-        public async Task ChangeStrength()
+        public async Task CheckStrength()
         {
             if (Cooley.selectedCharacters.TryGetValue(Context.User.ToString(), out Character character))
             {
@@ -23,7 +23,7 @@ namespace dnd_character_storage.Core.Commands
             }
         }
         [Command("dexterity"), Alias("d")]
-        public async Task ChangeDexterity()
+        public async Task CheckDexterity()
         {
             if (Cooley.selectedCharacters.TryGetValue(Context.User.ToString(), out Character character))
             {
@@ -38,7 +38,7 @@ namespace dnd_character_storage.Core.Commands
             }
         }
         [Command("constitution"), Alias("co")]
-        public async Task ChangeConstitution()
+        public async Task CheckConstitution()
         {
             if (Cooley.selectedCharacters.TryGetValue(Context.User.ToString(), out Character character))
             {
@@ -53,7 +53,7 @@ namespace dnd_character_storage.Core.Commands
             }
         }
         [Command("intelligence"), Alias("i")]
-        public async Task ChangeIntelligence()
+        public async Task CheckIntelligence()
         {
             if (Cooley.selectedCharacters.TryGetValue(Context.User.ToString(), out Character character))
             {
@@ -68,7 +68,7 @@ namespace dnd_character_storage.Core.Commands
             }
         }
         [Command("charisma"), Alias("ch")]
-        public async Task ChangeCharisma()
+        public async Task CheckCharisma()
         {
             if (Cooley.selectedCharacters.TryGetValue(Context.User.ToString(), out Character character))
             {

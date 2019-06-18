@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using Discord.WebSocket;
 
 namespace dnd_character_storage.Resources.Datatypes
 {
@@ -13,7 +11,7 @@ namespace dnd_character_storage.Resources.Datatypes
         public string Serial                { get; set; }
         public Professions Profession       { get; set; }
         public Races Race                   { get; set; }
-        public Alignments Alignment          { get; set; }
+        public Alignments Alignment         { get; set; }
         public int MaxHP                    { get; set; }
         public int TempHP                   { get; set; }
         public int CurrentHP                { get; set; }
@@ -23,10 +21,6 @@ namespace dnd_character_storage.Resources.Datatypes
 
         public void zero()
         {
-            try
-            {
-
-            
             this.Profession = Professions.none;
             this.Race = Races.human;
             this.Alignment = Alignments.trueneutral;
@@ -36,12 +30,42 @@ namespace dnd_character_storage.Resources.Datatypes
             this.Abilities.zero();
             this.ProfBonus = 0;
             this.Skills.zero();
+        }
 
-            }
-            catch (Exception e)
+        public string getAlignment()
+        {
+            string val = "";
+            switch (Alignment)
             {
-                Console.WriteLine(e);
+                case Alignments.lawfulgood:
+                    val = "lawful good";
+                    break;
+                case Alignments.lawfulneutral:
+                    val = "lawful neutral";
+                    break;
+                case Alignments.lawfulevil:
+                    val = "lawful evil";
+                    break;
+                case Alignments.neutralgood:
+                    val = "neutral good";
+                    break;
+                case Alignments.trueneutral:
+                    val = "true neutral";
+                    break;
+                case Alignments.neutralevil:
+                    val = "neutral evil";
+                    break;
+                case Alignments.chaoticgood:
+                    val = "chaotic good";
+                    break;
+                case Alignments.chaoticneutral:
+                    val = "chaotic neutral";
+                    break;
+                case Alignments.chaoticevil:
+                    val = "chaotic evil";
+                    break;
             }
+            return val;
         }
     }
     public class Abilities
