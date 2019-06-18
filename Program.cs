@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Reflection;
 using dnd_character_storage.Resources.Datatypes;
+using Newtonsoft.Json;
+using System.IO;
 
 
 namespace dnd_character_storage
@@ -68,7 +70,9 @@ namespace dnd_character_storage
             // Adds the commands to the Command Service
             await this.commands.AddModulesAsync(Assembly.GetEntryAssembly(), null);
 
-            var token = "NTc2MjYzODE4ODA0NTkyNjYy.XQaI5g.zStslDbHXJXmZyvzkrXpt-rsTF0";
+            var dir = System.IO.Path.GetFullPath(@"auth.json");
+            Authorizer auth = JsonConvert.DeserializeObject<Authorizer>(File.ReadAllText(dir));
+            var token = auth.Discord;
             
             // Continually tries logging in until successful every 2 seconds
             try
