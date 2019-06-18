@@ -12,6 +12,7 @@ namespace dnd_character_storage.Core.Commands
         [Command("edit"), Alias("e")]
         public async Task edit([Remainder] string s)
         {
+            s = s.ToLower();
             if (Cooley.selectedCharacters.TryGetValue(Context.User.ToString(), out Character _))
             {
                 if ( int.TryParse(s, out int a) )
@@ -35,7 +36,7 @@ namespace dnd_character_storage.Core.Commands
                 }
                 else
                 {
-                    await ReplyAsync ( $"{Context.User.Mention} invalid race. Use '-race list' to see a list of valid alignments." );
+                    await ReplyAsync ( $"{Context.User.Mention} invalid alignment. Use '-alignment list' to see a list of valid alignments." );
                 }
             }
             else

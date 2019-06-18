@@ -20,7 +20,7 @@ namespace dnd_character_storage.Core.Commands
                     {
                         Cooley.selectedCharacters[Context.User.ToString()].Race = getRaceFromInt(a);
                         serialize(Cooley.selectedCharacters[Context.User.ToString()]);
-                        await ReplyAsync ( $"{Context.User.Mention} set {Cooley.selectedCharacters[Context.User.ToString()].Name}'s race to {Cooley.selectedCharacters[Context.User.ToString()].Race}" );
+                        await ReplyAsync ( $"{Context.User.Mention} set {Cooley.selectedCharacters[Context.User.ToString()].Name}'s race to {Cooley.selectedCharacters[Context.User.ToString()].getRace()}" );
                     }
                     else
                     {
@@ -31,7 +31,7 @@ namespace dnd_character_storage.Core.Commands
                 {
                     Cooley.selectedCharacters[Context.User.ToString()].Race = getRaceFromString(name);
                     serialize(Cooley.selectedCharacters[Context.User.ToString()]);
-                    await ReplyAsync ( $"{Context.User.Mention} set {Cooley.selectedCharacters[Context.User.ToString()].Name}'s race to {Cooley.selectedCharacters[Context.User.ToString()].Race}" );
+                    await ReplyAsync ( $"{Context.User.Mention} set {Cooley.selectedCharacters[Context.User.ToString()].Name}'s race to {Cooley.selectedCharacters[Context.User.ToString()].getRace()}" );
                 }
                 else
                 {
@@ -53,7 +53,7 @@ namespace dnd_character_storage.Core.Commands
         {
             if (Cooley.selectedCharacters.TryGetValue(Context.User.ToString(), out Character _))
             {
-                await ReplyAsync ( $"{Context.User.Mention} {Cooley.selectedCharacters[Context.User.ToString()].Name}'s race is {Cooley.selectedCharacters[Context.User.ToString()].Race}" );
+                await ReplyAsync ( $"{Context.User.Mention} {Cooley.selectedCharacters[Context.User.ToString()].Name}'s race is {Cooley.selectedCharacters[Context.User.ToString()].getRace()}" );
             }
             else
             {

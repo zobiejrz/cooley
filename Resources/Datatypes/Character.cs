@@ -32,40 +32,174 @@ namespace dnd_character_storage.Resources.Datatypes
             this.Skills.zero();
         }
 
-        public string getAlignment()
+        public string getRace()
         {
-            string val = "";
-            switch (Alignment)
+            string value = "";
+            switch ( Race )
             {
-                case Alignments.lawfulgood:
-                    val = "lawful good";
+                case Races.dragonborn:
+                    value = "dragonborn";
                     break;
-                case Alignments.lawfulneutral:
-                    val = "lawful neutral";
+                case Races.dwarf:
+                    value = "dwarf";
                     break;
-                case Alignments.lawfulevil:
-                    val = "lawful evil";
+                case Races.elf:
+                    value = "elf";
                     break;
-                case Alignments.neutralgood:
-                    val = "neutral good";
+                case Races.gnome:
+                    value = "gnome";
                     break;
-                case Alignments.trueneutral:
-                    val = "true neutral";
+                case Races.halfelf:
+                    value = "half-elf";
                     break;
-                case Alignments.neutralevil:
-                    val = "neutral evil";
+                case Races.halfling:
+                    value = "halfling";
                     break;
-                case Alignments.chaoticgood:
-                    val = "chaotic good";
+                case Races.orc:
+                    value = "orc";
                     break;
-                case Alignments.chaoticneutral:
-                    val = "chaotic neutral";
+                case Races.halforc:
+                    value = "half-orc";
                     break;
-                case Alignments.chaoticevil:
-                    val = "chaotic evil";
+                case Races.human:
+                    value = "human";
+                    break;
+                case Races.tiefling:
+                    value = "tiefling";
+                    break;
+                case Races.feraltiefling:
+                    value = "feral tiefling";
+                    break;
+                case Races.aarakocra:
+                    value = "aarakocra";
+                    break;
+                case Races.airgenasi:
+                    value = "air genasi";
+                    break;
+                case Races.earthgenasi:
+                    value = "earth genasi";
+                    break;
+                case Races.firegenasi:
+                    value = "fire genasi";
+                    break;
+                case Races.watergenasi:
+                    value = "water genasi";
+                    break;
+                case Races.goliath:
+                    value = "goliath";
+                    break;
+                case Races.aasimar:
+                    value = "aasimar";
+                    break;
+                case Races.bugbear:
+                    value = "bugbear";
+                    break;
+                case Races.firbolg:
+                    value = "firbolg";
+                    break;
+                case Races.goblin:
+                    value = "goblin";
+                    break;
+                case Races.hobgoblin:
+                    value = "hobgoblin";
+                    break;
+                case Races.kenku:
+                    value = "kenku";
+                    break;
+                case Races.kobold:
+                    value = "kobold";
+                    break;
+                case Races.lizardfolk:
+                    value = "lizardfolk";
+                    break;
+                case Races.tabaxi:
+                    value = "tabaxi";
+                    break;
+                case Races.triton:
+                    value = "triton";
+                    break;
+                case Races.yuantipureblood:
+                    value = "yuanti pureblood";
+                    break;
+                case Races.tortle:
+                    value = "tortle";
+                    break;
+                case Races.gith:
+                    value = "gith";
+                    break;
+                case Races.changeling:
+                    value = "changeling";
+                    break;
+                case Races.kalashtar:
+                    value = "kalashtar";
+                    break;
+                case Races.beasthideshifter:
+                    value = "beasthide shifter";
+                    break;
+                case Races.longtoothshifter:
+                    value = "longtooth shifter";
+                    break;
+                case Races.swiftstrideshifter:
+                    value = "swiftstride shifter";
+                    break;
+                case Races.wildhuntshifter:
+                    value = "wildhunt shifter";
+                    break;
+                case Races.warforged:
+                    value = "warforged";
+                    break;
+                case Races.centaur:
+                    value = "centaur";
+                    break;
+                case Races.loxodon:
+                    value = "loxodon";
+                    break;
+                case Races.minotaur:
+                    value = "minotaur";
+                    break;
+                case Races.simichybrid:
+                    value = "simichybrid";
+                    break;
+                case Races.vedalken:
+                    value = "vedalken";
                     break;
             }
-            return val;
+            return value;
+        }
+        public string getAlignment()
+        {
+            string value = "";
+            switch ( Alignment )
+            {
+                case Alignments.lawfulgood:
+                    value = "lawful good";
+                    break;
+                case Alignments.lawfulneutral:
+                    value = "lawful neutral";
+                    break;
+                case Alignments.lawfulevil:
+                    value = "lawful evil";
+                    break;
+                case Alignments.neutralgood:
+                    value = "neutral good";
+                    break;
+                case Alignments.trueneutral:
+                    value = "true neutral";
+                    break;
+                case Alignments.neutralevil:
+                    value = "neutral evil";
+                    break;
+                case Alignments.chaoticgood:
+                    value = "chaotic good";
+                    break;
+                case Alignments.chaoticneutral:
+                    value = "chaotic neutral";
+                    break;
+                case Alignments.chaoticevil:
+                    value = "chaotic evil";
+                    break;
+            }
+            return value;
         }
     }
     public class Abilities
