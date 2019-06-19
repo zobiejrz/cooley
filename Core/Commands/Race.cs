@@ -8,7 +8,7 @@ namespace dnd_character_storage.Core.Commands
     [Group("race"), Alias("r")]
     public class Race : Command
     {
-        public string[] races = new string[] {"none", "dragonborn", "dwarf", "elf", "gnome", "half elf", "halfling", "orc", "half orc", "human", "tiefling", "feral tiefling", "aarakocra", "air genasi", "earth genasi", "fire genasi", "water genasi", "goliath", "aasimar", "bugbear", "firbolg", "goblin", "hobgoblin", "kenku", "kobold", "lizardfolk", "tabaxi", "triton", "yuanti pureblood", "tortle", "gith", "changeling", "kalashtar", "beasthide shifter", "longtooth shifter", "swiftstride shifter", "wildhunt shifter", "warforged", "centaur", "loxodon", "minotaur", "simichybrid", "vedalken"};
+        public string[] races = new string[] {"dragonborn", "dwarf", "elf", "gnome", "half elf", "halfling", "orc", "half orc", "human", "tiefling", "feral tiefling", "aarakocra", "air genasi", "earth genasi", "fire genasi", "water genasi", "goliath", "aasimar", "bugbear", "firbolg", "goblin", "hobgoblin", "kenku", "kobold", "lizardfolk", "tabaxi", "triton", "yuanti pureblood", "tortle", "gith", "changeling", "kalashtar", "beasthide shifter", "longtooth shifter", "swiftstride shifter", "wildhunt shifter", "warforged", "centaur", "loxodon", "minotaur", "simichybrid", "vedalken"};
         [Command("edit"), Alias("e")]
         public async Task edit([Remainder] string name)
         {
@@ -16,7 +16,7 @@ namespace dnd_character_storage.Core.Commands
             {
                 if ( int.TryParse(name, out int a) )
                 {
-                    if ( a > 0 && a < 43 )
+                    if ( a >= 0 && a <= races.Length )
                     {
                         Cooley.selectedCharacters[Context.User.ToString()].Race = getRaceFromInt(a);
                         serialize(Cooley.selectedCharacters[Context.User.ToString()]);
@@ -66,7 +66,7 @@ namespace dnd_character_storage.Core.Commands
             string list = "";
             for ( int i = 1; i < 43; i++ )
             {
-                list += $"{i}. {races[i]}\n";
+                list += $"{i}. {races[i-1]}\n";
             }
             await ReplyAsync ( $"{Context.User.Mention} here is the list of races:\n{list}" );
         }
@@ -75,7 +75,7 @@ namespace dnd_character_storage.Core.Commands
         [Command("help"), Alias("h", "?")]
         public async Task Help()
         {
-            await ReplyAsync ( $"{Context.User.Mention} Correct usage: \n\t'-race edit <race>' to change selected characters race\n\t'-name check' to check selected characters race\n\t'-name list' to see all races" );
+            await ReplyAsync ( $"{Context.User.Mention} Correct usage: \n\t'-race edit <race>' to change selected characters race\n\t'-race check' to check selected characters race\n\t'-race list' to see all races" );
         }
 
         private Races getRaceFromInt(int a)
@@ -83,130 +83,130 @@ namespace dnd_character_storage.Core.Commands
             Races value;
             switch ( a )
             {
-                case 1:
+                case 0:
                     value = Races.dragonborn;
                     break;
-                case 2:
+                case 1:
                     value = Races.dwarf;
                     break;
-                case 3:
+                case 2:
                     value = Races.elf;
                     break;
-                case 4:
+                case 3:
                     value = Races.gnome;
                     break;
-                case 5:
+                case 4:
                     value = Races.halfelf;
                     break;
-                case 6:
+                case 5:
                     value = Races.halfling;
                     break;
-                case 7:
+                case 6:
                     value = Races.orc;
                     break;
-                case 8:
+                case 7:
                     value = Races.halforc;
                     break;
-                case 9:
+                case 8:
                     value = Races.human;
                     break;
-                case 10:
+                case 9:
                     value = Races.tiefling;
                     break;
-                case 11:
+                case 10:
                     value = Races.feraltiefling;
                     break;
-                case 12:
+                case 11:
                     value = Races.aarakocra;
                     break;
-                case 13:
+                case 12:
                     value = Races.airgenasi;
                     break;
-                case 14:
+                case 13:
                     value = Races.earthgenasi;
                     break;
-                case 15:
+                case 14:
                     value = Races.firegenasi;
                     break;
-                case 16:
+                case 15:
                     value = Races.watergenasi;
                     break;
-                case 17:
+                case 16:
                     value = Races.goliath;
                     break;
-                case 18:
+                case 17:
                     value = Races.aasimar;
                     break;
-                case 19:
+                case 18:
                     value = Races.bugbear;
                     break;
-                case 20:
+                case 19:
                     value = Races.firbolg;
                     break;
-                case 21:
+                case 20:
                     value = Races.goblin;
                     break;
-                case 22:
+                case 21:
                     value = Races.hobgoblin;
                     break;
-                case 23:
+                case 22:
                     value = Races.kenku;
                     break;
-                case 24:
+                case 23:
                     value = Races.kobold;
                     break;
-                case 25:
+                case 24:
                     value = Races.lizardfolk;
                     break;
-                case 26:
+                case 25:
                     value = Races.tabaxi;
                     break;
-                case 27:
+                case 26:
                     value = Races.triton;
                     break;
-                case 28:
+                case 27:
                     value = Races.yuantipureblood;
                     break;
-                case 29:
+                case 28:
                     value = Races.tortle;
                     break;
-                case 30:
+                case 29:
                     value = Races.gith;
                     break;
-                case 31:
+                case 30:
                     value = Races.changeling;
                     break;
-                case 32:
+                case 31:
                     value = Races.kalashtar;
                     break;
-                case 33:
+                case 32:
                     value = Races.beasthideshifter;
                     break;
-                case 34:
+                case 33:
                     value = Races.longtoothshifter;
                     break;
-                case 35:
+                case 34:
                     value = Races.swiftstrideshifter;
                     break;
-                case 36:
+                case 35:
                     value = Races.wildhuntshifter;
                     break;
-                case 37:
+                case 36:
                     value = Races.warforged;
                     break;
-                case 38:
+                case 37:
                     value = Races.centaur;
                     break;
-                case 39:
+                case 38:
                     value = Races.loxodon;
                     break;
-                case 40:
+                case 39:
                     value = Races.minotaur;
                     break;
-                case 41:
+                case 40:
                     value = Races.simichybrid;
                     break;
-                case 42:
+                case 41:
                     value = Races.vedalken;
                     break;
                 default:

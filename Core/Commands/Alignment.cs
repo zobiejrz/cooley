@@ -17,7 +17,7 @@ namespace dnd_character_storage.Core.Commands
             {
                 if ( int.TryParse(s, out int a) )
                 {
-                    if ( a >= 1 && a <= 9 )
+                    if ( a >= 1 && a <= align.Length )
                     {
                         Cooley.selectedCharacters[Context.User.ToString()].Alignment = getAlignmentFromInt(a - 1);
                         serialize(Cooley.selectedCharacters[Context.User.ToString()]);

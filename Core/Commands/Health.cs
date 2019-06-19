@@ -104,7 +104,6 @@ namespace dnd_character_storage.Core.Commands
                 await ReplyAsync ( $"{Context.User.Mention} you must have a character selectd! Use -player select <name> to use this command!" );
             }
         }
-
         [Command("help"), Alias("h", "?")]
         public async Task Help()
         {

@@ -14,7 +14,6 @@ namespace dnd_character_storage
 {
     class Cooley
     {
-
         static void Main(string[] args) => new Cooley().Start().GetAwaiter().GetResult();
         private DiscordSocketClient client;
         private CommandService commands;

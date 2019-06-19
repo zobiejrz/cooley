@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace dnd_character_storage.Resources.Datatypes
 {
@@ -6,22 +7,24 @@ namespace dnd_character_storage.Resources.Datatypes
   [Serializable]
     public class Character
     {
-        public string Name                  { get; set; }
-        public string Owner                 { get; set; }
-        public string Serial                { get; set; }
-        public Professions Profession       { get; set; }
-        public Races Race                   { get; set; }
-        public Alignments Alignment         { get; set; }
-        public int MaxHP                    { get; set; }
-        public int TempHP                   { get; set; }
-        public int CurrentHP                { get; set; }
-        public Abilities Abilities          { get; set; }
-        public int ProfBonus                { get; set; }
-        public Skills Skills                { get; set; }
+        public string Name                              { get; set; }
+        public string Owner                             { get; set; }
+        public string Serial                            { get; set; }
+        public Dictionary<Professions, int> Profession  { get; set; }
+        public Races Race                               { get; set; }
+        public Alignments Alignment                     { get; set; }
+        public int MaxHP                                { get; set; }
+        public int TempHP                               { get; set; }
+        public int CurrentHP                            { get; set; }
+        public Abilities Abilities                      { get; set; }
+        public int ProfBonus                            { get; set; }
+        public Skills Skills                            { get; set; }
 
         public void zero()
         {
-            this.Profession = Professions.none;
+            this.Profession.Clear();
+            this.Profession.Add(Professions.barbarian, 0);
+
             this.Race = Races.human;
             this.Alignment = Alignments.trueneutral;
             this.MaxHP = 0;
@@ -356,7 +359,6 @@ namespace dnd_character_storage.Resources.Datatypes
 
     public enum Professions
     {
-        none = 0,
         barbarian,
         bard,
         cleric,
@@ -374,7 +376,6 @@ namespace dnd_character_storage.Resources.Datatypes
 
     public enum Races
     {
-        none = 0,
         dragonborn,
         dwarf,
         elf,

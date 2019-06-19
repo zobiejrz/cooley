@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.IO;
 using Discord.Commands;
+using System.Collections.Generic;
 
 using dnd_character_storage.Resources.Datatypes;
 
@@ -27,7 +28,8 @@ namespace dnd_character_storage.Core.Commands
                 var tempSerial = $"{Context.User.ToString()}{getTimestamp()}";
                 character.Serial = getHashString(tempSerial);
                 
-                character.Profession = Professions.none;
+                character.Profession = new Dictionary<Professions, int>();
+                character.Profession.Add(Professions.barbarian, 0);
                 character.Race = Races.human;
                 character.Alignment = Alignments.trueneutral;
                 character.MaxHP = 0;
