@@ -8,7 +8,7 @@ using System.Reflection;
 using dnd_character_storage.Resources.Datatypes;
 using Newtonsoft.Json;
 using System.IO;
-
+using System.Linq;
 
 namespace dnd_character_storage
 {
@@ -60,6 +60,17 @@ namespace dnd_character_storage
 
                 var Result = await this.commands.ExecuteAsync(Context, argPos, null, MultiMatchHandling.Best);
 
+                if ( Cooley.selectedCharacters.TryGetValue(Context.User.ToString(), out Character c) )
+                {
+                    string tempDir = $"Resources/CharacterData/{c.Owner.ToString()}/{c.Serial}.json";
+                    string playerDir = System.IO.Path.GetFullPath(tempDir);
+                    Character d = JsonConvert.DeserializeObject<Character>(File.ReadAllText(playerDir));
+                    if ( d != c )
+                    {
+                        File.WriteAllText(playerDir, JsonConvert.SerializeObject(c));
+                    }
+                }
+                
                 if (!Result.IsSuccess)
                 {
                     Console.WriteLine("ERR - Command `" + Context.Message + "` could not be completed:\n\t" + Result.ErrorReason);

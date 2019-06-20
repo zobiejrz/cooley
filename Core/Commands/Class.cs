@@ -23,7 +23,6 @@ namespace dnd_character_storage.Core.Commands
                         if ( !Cooley.selectedCharacters[Context.User.ToString()].Profession.ContainsKey(cla) )
                         {
                             Cooley.selectedCharacters[Context.User.ToString()].Profession.Add(cla, 0);
-                            serialize(Cooley.selectedCharacters[Context.User.ToString()]);
                             await ReplyAsync( $"{Context.User.Mention} {Cooley.selectedCharacters[Context.User.ToString()].Name} is now a level 0 {cla}" );
                         }
                         else
@@ -42,7 +41,6 @@ namespace dnd_character_storage.Core.Commands
                     if ( !Cooley.selectedCharacters[Context.User.ToString()].Profession.ContainsKey(cla) )
                     {
                         Cooley.selectedCharacters[Context.User.ToString()].Profession.Add(cla, 0);
-                        serialize(Cooley.selectedCharacters[Context.User.ToString()]);
                         await ReplyAsync( $"{Context.User.Mention} {Cooley.selectedCharacters[Context.User.ToString()].Name} is now a level 0 {cla}" );
                     }
                     else
@@ -73,7 +71,6 @@ namespace dnd_character_storage.Core.Commands
                         if ( Cooley.selectedCharacters[Context.User.ToString()].Profession.ContainsKey(cla) )
                         {
                             Cooley.selectedCharacters[Context.User.ToString()].Profession.Remove(cla);
-                            serialize(Cooley.selectedCharacters[Context.User.ToString()]);
                             await ReplyAsync( $"{Context.User.Mention} {Cooley.selectedCharacters[Context.User.ToString()].Name} is no longer a {cla}" );
                         }
                         else
@@ -92,7 +89,6 @@ namespace dnd_character_storage.Core.Commands
                     if ( Cooley.selectedCharacters[Context.User.ToString()].Profession.ContainsKey(cla) )
                     {
                         Cooley.selectedCharacters[Context.User.ToString()].Profession.Remove(cla);
-                        serialize(Cooley.selectedCharacters[Context.User.ToString()]);
                         await ReplyAsync( $"{Context.User.Mention} {Cooley.selectedCharacters[Context.User.ToString()].Name} is no longer a {cla}" );
                     }
                     else
@@ -131,7 +127,6 @@ namespace dnd_character_storage.Core.Commands
                             if ( int.TryParse(lvlString, out int lvl) )
                             {
                                 Cooley.selectedCharacters[Context.User.ToString()].Profession[tempClass] = lvl;
-                                serialize(Cooley.selectedCharacters[Context.User.ToString()]);
                                 await ReplyAsync( $"{Context.User.Mention} {Cooley.selectedCharacters[Context.User.ToString()].Name} is now a level {lvl} {tempClass}" );
                             }
                             else
@@ -157,7 +152,6 @@ namespace dnd_character_storage.Core.Commands
                         if ( int.TryParse(lvlString, out int lvl) )
                         {
                             Cooley.selectedCharacters[Context.User.ToString()].Profession[tempClass] = lvl;
-                            serialize(Cooley.selectedCharacters[Context.User.ToString()]);
                             await ReplyAsync( $"{Context.User.Mention} {Cooley.selectedCharacters[Context.User.ToString()].Name} is now a level {lvl} {tempClass}" );
                         }
                         else

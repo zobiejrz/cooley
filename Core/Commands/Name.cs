@@ -15,7 +15,6 @@ namespace dnd_character_storage.Core.Commands
                 {
                     var oldName = Cooley.selectedCharacters[Context.User.ToString()].Name;
                     Cooley.selectedCharacters[Context.User.ToString()].Name = name;
-                    serialize(Cooley.selectedCharacters[Context.User.ToString()]);
                     await ReplyAsync ( $"{Context.User.Mention} you've renamed {oldName} to {name}!" );
                 }
                 else

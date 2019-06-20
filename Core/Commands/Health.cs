@@ -17,7 +17,6 @@ namespace dnd_character_storage.Core.Commands
                     if ( int.TryParse(a, out int b) )
                     {
                         Cooley.selectedCharacters[Context.User.ToString()].MaxHP = b;
-                        serialize(Cooley.selectedCharacters[Context.User.ToString()]);
                         await ReplyAsync ( $"{Context.User.Mention} changed {Cooley.selectedCharacters[Context.User.ToString()].Name}'s Max HP to {b}" );
                     }
                     else
@@ -43,7 +42,6 @@ namespace dnd_character_storage.Core.Commands
                     if ( int.TryParse(a, out int b) )
                     {
                         Cooley.selectedCharacters[Context.User.ToString()].TempHP = b;
-                        serialize(Cooley.selectedCharacters[Context.User.ToString()]);
                         await ReplyAsync ( $"{Context.User.Mention} changed {Cooley.selectedCharacters[Context.User.ToString()].Name}'s Temp HP to {b}" );
                     }
                     else
@@ -69,7 +67,6 @@ namespace dnd_character_storage.Core.Commands
                     if ( int.TryParse(a, out int b) )
                     {
                         Cooley.selectedCharacters[Context.User.ToString()].CurrentHP = b;
-                        serialize(Cooley.selectedCharacters[Context.User.ToString()]);
                         await ReplyAsync ( $"{Context.User.Mention} changed {Cooley.selectedCharacters[Context.User.ToString()].Name}'s Current HP to {b}" );
                     }
                     else

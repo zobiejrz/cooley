@@ -19,7 +19,6 @@ namespace dnd_character_storage.Core.Commands
                     if ( a >= 0 && a <= races.Length )
                     {
                         Cooley.selectedCharacters[Context.User.ToString()].Race = getRaceFromInt(a);
-                        serialize(Cooley.selectedCharacters[Context.User.ToString()]);
                         await ReplyAsync ( $"{Context.User.Mention} set {Cooley.selectedCharacters[Context.User.ToString()].Name}'s race to {Cooley.selectedCharacters[Context.User.ToString()].getRace()}" );
                     }
                     else
@@ -30,7 +29,6 @@ namespace dnd_character_storage.Core.Commands
                 else if ( races.Contains(name) )
                 {
                     Cooley.selectedCharacters[Context.User.ToString()].Race = getRaceFromString(name);
-                    serialize(Cooley.selectedCharacters[Context.User.ToString()]);
                     await ReplyAsync ( $"{Context.User.Mention} set {Cooley.selectedCharacters[Context.User.ToString()].Name}'s race to {Cooley.selectedCharacters[Context.User.ToString()].getRace()}" );
                 }
                 else

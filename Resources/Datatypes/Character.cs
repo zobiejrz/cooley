@@ -32,7 +32,6 @@ namespace dnd_character_storage.Resources.Datatypes
             this.CurrentHP = 0;
             this.Abilities.zero();
             this.ProfBonus = 0;
-            this.Skills.zero();
         }
 
         public string getRace()
@@ -204,6 +203,80 @@ namespace dnd_character_storage.Resources.Datatypes
             }
             return value;
         }
+        public void UpdateSkills()
+        {
+            if ( this.Abilities.Dexterity.isProficient )
+            {
+                this.Skills.Acrobatics = this.Abilities.Dexterity.Modifier + this.ProfBonus;
+                this.Skills.SleightOfHand = this.Abilities.Dexterity.Modifier + this.ProfBonus;
+                this.Skills.Stealth = this.Abilities.Dexterity.Modifier + this.ProfBonus;
+            }
+            else
+            {
+                this.Skills.Acrobatics = this.Abilities.Dexterity.Modifier;
+                this.Skills.SleightOfHand = this.Abilities.Dexterity.Modifier;
+                this.Skills.Stealth = this.Abilities.Dexterity.Modifier;
+            }
+            
+            if ( this.Abilities.Wisdom.isProficient )
+            {
+                this.Skills.AnimalHandeling = this.Abilities.Wisdom.Modifier + this.ProfBonus;
+                this.Skills.Perception = this.Abilities.Wisdom.Modifier + this.ProfBonus;
+                this.Skills.Survival = this.Abilities.Wisdom.Modifier + this.ProfBonus;
+                this.Skills.Medicine = this.Abilities.Wisdom.Modifier + this.ProfBonus;
+                this.Skills.Insight = this.Abilities.Wisdom.Modifier + this.ProfBonus;
+            }
+            else
+            {
+                this.Skills.AnimalHandeling = this.Abilities.Wisdom.Modifier;
+                this.Skills.Perception = this.Abilities.Wisdom.Modifier;
+                this.Skills.Survival = this.Abilities.Wisdom.Modifier;
+                this.Skills.Medicine = this.Abilities.Wisdom.Modifier;
+                this.Skills.Insight = this.Abilities.Wisdom.Modifier;
+            }
+            
+            if ( this.Abilities.Intelligence.isProficient )
+            {
+                this.Skills.Arcana = this.Abilities.Intelligence.Modifier + this.ProfBonus;
+                this.Skills.History = this.Abilities.Intelligence.Modifier + this.ProfBonus;
+                this.Skills.Investigation = this.Abilities.Intelligence.Modifier + this.ProfBonus;
+                this.Skills.Nature = this.Abilities.Intelligence.Modifier + this.ProfBonus;
+                this.Skills.Religion = this.Abilities.Intelligence.Modifier + this.ProfBonus;
+            }
+            else
+            {
+                this.Skills.Arcana = this.Abilities.Intelligence.Modifier;
+                this.Skills.History = this.Abilities.Intelligence.Modifier;
+                this.Skills.Investigation = this.Abilities.Intelligence.Modifier;
+                this.Skills.Nature = this.Abilities.Intelligence.Modifier;
+                this.Skills.Religion = this.Abilities.Intelligence.Modifier;
+            }
+
+            if ( this.Abilities.Strength.isProficient )
+            {
+                this.Skills.Athletics = this.Abilities.Strength.Modifier + this.ProfBonus;
+            }
+            else
+            {
+                this.Skills.Athletics = this.Abilities.Strength.Modifier;
+            }
+
+            if ( this.Abilities.Charisma.isProficient )
+            {
+                this.Skills.Deception = this.Abilities.Charisma.Modifier + this.ProfBonus;
+                this.Skills.Intimidation = this.Abilities.Charisma.Modifier + this.ProfBonus;
+                this.Skills.Performance = this.Abilities.Charisma.Modifier + this.ProfBonus;
+                this.Skills.Persuasion = this.Abilities.Charisma.Modifier + this.ProfBonus;
+            }
+            else
+            {
+                this.Skills.Deception = this.Abilities.Charisma.Modifier;
+                this.Skills.Intimidation = this.Abilities.Charisma.Modifier;
+                this.Skills.Performance = this.Abilities.Charisma.Modifier;
+                this.Skills.Persuasion = this.Abilities.Charisma.Modifier;
+            }
+            
+        } 
     }
     public class Abilities
     {
@@ -212,6 +285,7 @@ namespace dnd_character_storage.Resources.Datatypes
         public SubAbility Dexterity        { get; set; }
         public SubAbility Constitution     { get; set; }
         public SubAbility Intelligence     { get; set; }
+        public SubAbility Wisdom           { get; set; }
         public SubAbility Charisma         { get; set; }
         
 
@@ -219,30 +293,25 @@ namespace dnd_character_storage.Resources.Datatypes
         {
             Strength.Base = 0;
             Strength.Modifier = 0;
-            Strength.Saving = 0;
 
             Dexterity.Base = 0;
             Dexterity.Modifier = 0;
-            Dexterity.Saving = 0;
 
             Constitution.Base = 0;
             Constitution.Modifier = 0;
-            Constitution.Saving = 0;
 
             Intelligence.Base = 0;
             Intelligence.Modifier = 0;
-            Intelligence.Saving = 0;
             
             Charisma.Base = 0;
             Charisma.Modifier = 0;
-            Charisma.Saving = 0;
         }
     }
     public class SubAbility
     {
-        public int Base         { get; set; }
-        public int Modifier     { get; set; }
-        public int Saving       { get; set; }
+        public int Base             { get; set; }
+        public int Modifier         { get; set; }
+        public Boolean isProficient { get; set; }
         public void UpdateModifier()
         {
             if ( Base <= 1 )
@@ -332,29 +401,7 @@ namespace dnd_character_storage.Resources.Datatypes
         public int Religion         { get; set; }
         public int SleightOfHand    { get; set; }
         public int Stealth          { get; set; }
-        public int Survival         { get; set; } 
-
-        public void zero()
-        {
-            this.Acrobatics = 0;
-            this.AnimalHandeling = 0;
-            this.Arcana = 0;
-            this.Athletics = 0;
-            this.Deception = 0;
-            this.History = 0;
-            this.Insight = 0;
-            this.Intimidation = 0;
-            this.Investigation = 0;
-            this.Medicine = 0;
-            this.Nature = 0;
-            this.Perception = 0;
-            this.Performance = 0;
-            this.Persuasion = 0;
-            this.Religion = 0;
-            this.SleightOfHand = 0;
-            this.Stealth = 0;
-            this.Survival = 0;
-        }      
+        public int Survival         { get; set; }      
     }
 
     public enum Professions

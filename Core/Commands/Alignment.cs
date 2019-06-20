@@ -20,7 +20,6 @@ namespace dnd_character_storage.Core.Commands
                     if ( a >= 1 && a <= align.Length )
                     {
                         Cooley.selectedCharacters[Context.User.ToString()].Alignment = getAlignmentFromInt(a - 1);
-                        serialize(Cooley.selectedCharacters[Context.User.ToString()]);
                         await ReplyAsync ( $"{Context.User.Mention} set {Cooley.selectedCharacters[Context.User.ToString()].Name}'s alignment to {Cooley.selectedCharacters[Context.User.ToString()].getAlignment()}" );
                     }
                     else
@@ -31,7 +30,6 @@ namespace dnd_character_storage.Core.Commands
                 else if ( align.Contains(s) )
                 {
                     Cooley.selectedCharacters[Context.User.ToString()].Alignment = getAlignmentFromString(s);
-                    serialize(Cooley.selectedCharacters[Context.User.ToString()]);
                     await ReplyAsync ( $"{Context.User.Mention} set {Cooley.selectedCharacters[Context.User.ToString()].Name}'s alignment to {Cooley.selectedCharacters[Context.User.ToString()].getAlignment()}" );
                 }
                 else

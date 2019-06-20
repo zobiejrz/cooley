@@ -41,6 +41,7 @@ namespace dnd_character_storage.Core.Commands
                 character.Abilities.Dexterity = new SubAbility();
                 character.Abilities.Constitution = new SubAbility();
                 character.Abilities.Intelligence = new SubAbility();
+                character.Abilities.Wisdom = new SubAbility();
                 character.Abilities.Charisma = new SubAbility();
 
                 character.ProfBonus = 0;
