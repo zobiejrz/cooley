@@ -45,6 +45,7 @@ namespace dnd_character_storage.Core.Commands
                 character.Abilities.Charisma = new SubAbility();
 
                 character.ProfBonus = 0;
+                character.Wallet = new Wallet();
 
                 character.Skills = new Skills();
                 character.zero();
