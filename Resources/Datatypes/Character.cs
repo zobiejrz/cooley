@@ -10,6 +10,13 @@ namespace dnd_character_storage.Resources.Datatypes
         public string Name                              { get; set; }
         public string Owner                             { get; set; }
         public string Serial                            { get; set; }
+        public int Age                                  { get; set; }
+        public string Height                            { get; set; }
+        public string Weight                            { get; set; }
+        public string EyeColor                          { get; set; }
+        public string SkinColor                         { get; set; }
+        public string HairColor                         { get; set; }
+        public int XP                                   { get; set; }
         public Dictionary<Professions, int> Profession  { get; set; }
         public Races Race                               { get; set; }
         public Alignments Alignment                     { get; set; }
@@ -19,6 +26,9 @@ namespace dnd_character_storage.Resources.Datatypes
         public Abilities Abilities                      { get; set; }
         public int ProfBonus                            { get; set; }
         public Skills Skills                            { get; set; }
+        public int ArmorClass                           { get; set; }
+        public int SpellSlots                           { get; set; }
+        public Wallet Wallet { get; set; }
 
         public void zero()
         {
@@ -32,6 +42,8 @@ namespace dnd_character_storage.Resources.Datatypes
             this.CurrentHP = 0;
             this.Abilities.zero();
             this.ProfBonus = 0;
+            this.UpdateSkills();
+            this.XP = 0;
         }
 
         public string getRace()
@@ -277,6 +289,41 @@ namespace dnd_character_storage.Resources.Datatypes
             }
             
         } 
+    }
+    public class Wallet
+    {
+        public int copper { get; set; }
+        public int silver { get; set; }
+        public int electrum { get; set; }
+        public int gold { get; set; }
+        public int platinum { get; set; }
+        
+        public void Consolidate()
+        {
+            while ( copper >= 100 )
+            {
+                copper -= 100;
+                silver += 1;
+            }
+
+            while ( silver >= 100 )
+            {
+                silver -= 100;
+                electrum += 1;
+            }
+            
+            while ( electrum >= 100 )
+            {
+                electrum -= 100;
+                gold += 1;
+            }
+
+            while ( gold >= 100 )
+            {
+                gold -= 100;
+                platinum += 1;
+            }
+        }
     }
     public class Abilities
     {

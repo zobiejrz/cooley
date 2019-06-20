@@ -55,7 +55,7 @@ namespace dnd_character_storage.Core.Commands
             }
             else
             {
-                await ReplyAsync( $"{Context.User.Mention} you must have a character selectd! Use -player select <name> to use this command!" );
+                await ReplyAsync( $"{Context.User.Mention} you must have a character selected! Use -player select <name> to use this command!" );
             }
         }
         [Command("delete"), Alias("d")]
@@ -196,7 +196,7 @@ namespace dnd_character_storage.Core.Commands
             }
             else
             {
-                await ReplyAsync ( $"{Context.User.Mention} you must have a character selectd! Use -player select <name> to use this command!" );
+                await ReplyAsync ( $"{Context.User.Mention} you must have a character selected! Use -player select <name> to use this command!" );
             }
 
         }
