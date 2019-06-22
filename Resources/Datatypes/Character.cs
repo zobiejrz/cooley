@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace dnd_character_storage.Resources.Datatypes
@@ -28,7 +29,9 @@ namespace dnd_character_storage.Resources.Datatypes
         public Skills Skills                            { get; set; }
         public int ArmorClass                           { get; set; }
         public int SpellSlots                           { get; set; }
-        public Wallet Wallet { get; set; }
+        public Wallet Purse                             { get; set; }
+        public List<Item> Inventory                     { get; set; }
+        public List<Item> Features                      { get; set; }
 
         public void zero()
         {
@@ -44,6 +47,9 @@ namespace dnd_character_storage.Resources.Datatypes
             this.ProfBonus = 0;
             this.UpdateSkills();
             this.XP = 0;
+
+            Inventory.Clear();
+            Features.Clear();
         }
 
         public string getRace()
@@ -292,36 +298,36 @@ namespace dnd_character_storage.Resources.Datatypes
     }
     public class Wallet
     {
-        public int copper { get; set; }
-        public int silver { get; set; }
-        public int electrum { get; set; }
-        public int gold { get; set; }
-        public int platinum { get; set; }
+        public int Copper       { get; set; }
+        public int Silver       { get; set; }
+        public int Electrum     { get; set; }
+        public int Gold         { get; set; }
+        public int Platinum     { get; set; }
         
         public void Consolidate()
         {
-            while ( copper >= 100 )
+            while ( Copper >= 100 )
             {
-                copper -= 100;
-                silver += 1;
+                Copper -= 100;
+                Silver += 1;
             }
 
-            while ( silver >= 100 )
+            while ( Silver >= 100 )
             {
-                silver -= 100;
-                electrum += 1;
+                Silver -= 100;
+                Electrum += 1;
             }
             
-            while ( electrum >= 100 )
+            while ( Electrum >= 100 )
             {
-                electrum -= 100;
-                gold += 1;
+                Electrum -= 100;
+                Gold += 1;
             }
 
-            while ( gold >= 100 )
+            while ( Gold >= 100 )
             {
-                gold -= 100;
-                platinum += 1;
+                Gold -= 100;
+                Platinum += 1;
             }
         }
     }

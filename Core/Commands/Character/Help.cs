@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using Discord.Commands;
 namespace dnd_character_storage.Core.Commands
@@ -15,7 +14,7 @@ namespace dnd_character_storage.Core.Commands
                             + "\n-Health"
                             + "\n-name"
                             + "\n-alignment"
-                            + "\n-check" );// This will become -<ability>
+                            + "\n-<ability>" );
             /*
             **
             ** -<ability> [ check | set ] <number>

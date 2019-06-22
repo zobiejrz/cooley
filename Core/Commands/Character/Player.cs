@@ -19,6 +19,7 @@ namespace dnd_character_storage.Core.Commands
         [Command("new"), Alias("n")]
         public async Task New([Remainder] string name)
         {
+            try {
             checkIfNewUser(Context.User);
             if (isNewCharacter(Context.User, name))
             {
@@ -45,11 +46,19 @@ namespace dnd_character_storage.Core.Commands
                 character.Abilities.Charisma = new SubAbility();
 
                 character.ProfBonus = 0;
-                character.Wallet = new Wallet();
+                character.Purse = new Wallet();
+                character.Purse.Platinum = 0;
+                character.Purse.Gold = 0;
+                character.Purse.Electrum = 0;
+                character.Purse.Silver = 0;
+                character.Purse.Copper = 0;
 
                 character.Skills = new Skills();
-                character.zero();
+                character.Inventory = new List<Item>();
+                character.Features = new List<Item>();
+                
 
+                character.zero();
                 serialize(character);
                 await ReplyAsync( Context.User.Mention + ", I finished your new character, " + character.Name + ". Use the -player select <name> command to select the character." );
             }
@@ -57,6 +66,7 @@ namespace dnd_character_storage.Core.Commands
             {
                 await ReplyAsync( Context.User.Mention + " you've already made a character with that name, maybe try -player select " + name + " or use a new name." );
             }
+            } catch (Exception E) {Console.WriteLine(E);}
         }
         [Command("new"), Alias("n")]
         public async Task NewWithoutParam()
