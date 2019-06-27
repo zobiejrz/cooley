@@ -2,3 +2,4 @@
 *.pyc
 Resources/auth.json
 auth.txt
+.vscode
